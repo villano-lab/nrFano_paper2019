@@ -1,0 +1,15 @@
+set up this directory to hold matplotlib styles, this will clean up notebooks
+this is the first time I'm trying this so eventually it should probably be automatically included
+in the repo when it is instantiated. see:
+
+https://matplotlib.org/faq/troubleshooting_faq.html#locating-matplotlib-config-dir
+
+https://matplotlib.org/users/customizing.html
+
+https://stackoverflow.com/questions/5971312/how-to-set-environment-variables-in-python
+
+The MPLCONFIGDIR env variable is defined in the .pyenv in the upper directory, that's usually
+where I envoke the Jupyter notebooks from. 
+
+Note there were some places I explicitly defined global vars like axis_font, legend_font, and
+title_font.  Those are included in the upper directories .pyenv file.
