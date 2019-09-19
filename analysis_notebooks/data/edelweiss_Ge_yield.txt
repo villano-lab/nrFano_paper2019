@@ -1,0 +1,7 @@
+'Erecoil (keV)'   'Erecoil Error (keV)'   'Yield (percent)'   'Yield Error (percent)'
+94   3   34.7   3.8
+80   2   32.8   3.9
+76   2   30.1   7.0
+123  4   33.7   3.7
+104  3   31.4   4.2
+100  3   31.4   4.4

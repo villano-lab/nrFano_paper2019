@@ -1,0 +1,460 @@
+GGA3/ER/4.0/1.000E-04/0.035/000/
+True
+1.0
+1.02
+[]
+GGA3/ER/4.0/1.000E-04/0.035/000/
+True
+GGA3/NR/4.0/5.556E-02/0.035/000/
+True
+1.0
+1.0
+[]
+GGA3/NR/4.0/5.556E-02/0.035/000/
+True
+GGA3/NR/4.0/1.000E-04/0.035/000/
+True
+1.0
+1.0
+[  7.           7.96984925   8.93969849   9.90954774  10.87939698
+  11.84924623  12.81909548  13.78894472  14.75879397  15.72864322
+  16.69849246  17.66834171  18.63819095  19.6080402   20.57788945
+  21.54773869  22.51758794  23.48743719  24.45728643  25.42713568
+  26.39698492  27.36683417  28.33668342  29.30653266  30.27638191
+  31.24623116  32.2160804   33.18592965  34.15577889  35.12562814
+  36.09547739  37.06532663  38.03517588  39.00502513  39.97487437
+  40.94472362  41.91457286  42.88442211  43.85427136  44.8241206
+  45.79396985  46.7638191   47.73366834  48.70351759  49.67336683
+  50.64321608  51.61306533  52.58291457  53.55276382  54.52261307
+  55.49246231  56.46231156  57.4321608   58.40201005  59.3718593
+  60.34170854  61.31155779  62.28140704  63.25125628  64.22110553
+  65.19095477  66.16080402  67.13065327  68.10050251  69.07035176
+  70.04020101  71.01005025  71.9798995   72.94974874  73.91959799
+  74.88944724  75.85929648  76.82914573  77.79899497  78.76884422
+  79.73869347  80.70854271  81.67839196  82.64824121  83.61809045
+  84.5879397   85.55778894  86.52763819  87.49748744  88.46733668
+  89.43718593  90.40703518  91.37688442  92.34673367  93.31658291
+  94.28643216  95.25628141  96.22613065  97.1959799   98.16582915
+  99.13567839 100.10552764 101.07537688 102.04522613 103.01507538
+ 103.98492462 104.95477387 105.92462312 106.89447236 107.86432161
+ 108.83417085 109.8040201  110.77386935 111.74371859 112.71356784
+ 113.68341709 114.65326633 115.62311558 116.59296482 117.56281407
+ 118.53266332 119.50251256 120.47236181 121.44221106 122.4120603
+ 123.38190955 124.35175879 125.32160804 126.29145729 127.26130653
+ 128.23115578 129.20100503 130.17085427 131.14070352 132.11055276
+ 133.08040201 134.05025126 135.0201005  135.98994975 136.95979899
+ 137.92964824 138.89949749 139.86934673 140.83919598 141.80904523
+ 142.77889447 143.74874372 144.71859296 145.68844221 146.65829146
+ 147.6281407  148.59798995 149.5678392  150.53768844 151.50753769
+ 152.47738693 153.44723618 154.41708543 155.38693467 156.35678392
+ 157.32663317 158.29648241 159.26633166 160.2361809  161.20603015
+ 162.1758794  163.14572864 164.11557789 165.08542714 166.05527638
+ 167.02512563 167.99497487 168.96482412 169.93467337 170.90452261
+ 171.87437186 172.84422111 173.81407035 174.7839196  175.75376884
+ 176.72361809 177.69346734 178.66331658 179.63316583 180.60301508
+ 181.57286432 182.54271357 183.51256281 184.48241206 185.45226131
+ 186.42211055 187.3919598  188.36180905 189.33165829 190.30150754
+ 191.27135678 192.24120603 193.21105528 194.18090452 195.15075377
+ 196.12060302 197.09045226 198.06030151 199.03015075 200.        ]
+Calculating with sigmomEdw for E = 7.00 keV
+0.16132051375771395
+Calculating with sigmomEdw for E = 7.97 keV
+0.14398140042491323
+Calculating with sigmomEdw for E = 8.94 keV
+0.12975065083771692
+Calculating with sigmomEdw for E = 9.91 keV
+0.11796382717721582
+Calculating with sigmomEdw for E = 10.88 keV
+0.10810767379215587
+Calculating with sigmomEdw for E = 11.85 keV
+0.09978007086526439
+Calculating with sigmomEdw for E = 12.82 keV
+0.09266836366843365
+Calculating with sigmomEdw for E = 13.79 keV
+0.08653173246616003
+Calculating with sigmomEdw for E = 14.76 keV
+0.08118529304219456
+Calculating with sigmomEdw for E = 15.73 keV
+0.07648660718795851
+Calculating with sigmomEdw for E = 16.70 keV
+0.0723249964297163
+Calculating with sigmomEdw for E = 17.67 keV
+0.06861349323739606
+Calculating with sigmomEdw for E = 18.64 keV
+0.06528293573509569
+Calculating with sigmomEdw for E = 19.61 keV
+0.062277671296856275
+Calculating with sigmomEdw for E = 20.58 keV
+0.059552420716486185
+Calculating with sigmomEdw for E = 21.55 keV
+0.05706996953698906
+Calculating with sigmomEdw for E = 22.52 keV
+0.05479944525410847
+Calculating with sigmomEdw for E = 23.49 keV
+0.05271502338886316
+Calculating with sigmomEdw for E = 24.46 keV
+0.05079492735707187
+Calculating with sigmomEdw for E = 25.43 keV
+0.049020670703343164
+Calculating with sigmomEdw for E = 26.40 keV
+0.04737645192761646
+Calculating with sigmomEdw for E = 27.37 keV
+0.04584868525374532
+Calculating with sigmomEdw for E = 28.34 keV
+0.04442562268177403
+Calculating with sigmomEdw for E = 29.31 keV
+0.04309705473054679
+Calculating with sigmomEdw for E = 30.28 keV
+0.041854064172033106
+Calculating with sigmomEdw for E = 31.25 keV
+0.04068882794270436
+Calculating with sigmomEdw for E = 32.22 keV
+0.03959445358287281
+Calculating with sigmomEdw for E = 33.19 keV
+0.03856484486671222
+Calculating with sigmomEdw for E = 34.16 keV
+0.037594588868394736
+Calculating with sigmomEdw for E = 35.13 keV
+0.036678863276411997
+Calculating with sigmomEdw for E = 36.10 keV
+0.035813357323798416
+Calculating with sigmomEdw for E = 37.07 keV
+0.034994205505935246
+Calculating with sigmomEdw for E = 38.04 keV
+0.03421793131510523
+Calculating with sigmomEdw for E = 39.01 keV
+0.03348139936478579
+Calculating with sigmomEdw for E = 39.97 keV
+0.0327817742474681
+Calculating with sigmomEdw for E = 40.94 keV
+0.03211648564448177
+Calculating with sigmomEdw for E = 41.91 keV
+0.03148319740606097
+Calculating with sigmomEdw for E = 42.88 keV
+0.030879781799018624
+Calculating with sigmomEdw for E = 43.85 keV
+0.03030429645172844
+Calculating with sigmomEdw for E = 44.82 keV
+0.02975496453012911
+Calculating with sigmomEdw for E = 45.79 keV
+0.029230157378918577
+Calculating with sigmomEdw for E = 46.76 keV
+0.02872837928257857
+Calculating with sigmomEdw for E = 47.73 keV
+0.028248254032756222
+Calculating with sigmomEdw for E = 48.70 keV
+0.027788513581875958
+Calculating with sigmomEdw for E = 49.67 keV
+0.02734798667267332
+Calculating with sigmomEdw for E = 50.64 keV
+0.026925590590008867
+Calculating with sigmomEdw for E = 51.61 keV
+0.0265203224721704
+Calculating with sigmomEdw for E = 52.58 keV
+0.026131252063002364
+Calculating with sigmomEdw for E = 53.55 keV
+0.025757515305450437
+Calculating with sigmomEdw for E = 54.52 keV
+0.02539830844661374
+Calculating with sigmomEdw for E = 55.49 keV
+0.025052882834813196
+Calculating with sigmomEdw for E = 56.46 keV
+0.024720540221023327
+Calculating with sigmomEdw for E = 57.43 keV
+0.02440062862679034
+Calculating with sigmomEdw for E = 58.40 keV
+0.024092538464128725
+Calculating with sigmomEdw for E = 59.37 keV
+0.023795699149076883
+Calculating with sigmomEdw for E = 60.34 keV
+0.02350957601000778
+Calculating with sigmomEdw for E = 61.31 keV
+0.023233667475156924
+Calculating with sigmomEdw for E = 62.28 keV
+0.022967502524227957
+Calculating with sigmomEdw for E = 63.25 keV
+0.022710638383054725
+Calculating with sigmomEdw for E = 64.22 keV
+0.02246265841110843
+Calculating with sigmomEdw for E = 65.19 keV
+0.022223170202099136
+Calculating with sigmomEdw for E = 66.16 keV
+0.02199180380924921
+Calculating with sigmomEdw for E = 67.13 keV
+0.021768210145513226
+Calculating with sigmomEdw for E = 68.10 keV
+0.021552059556498734
+Calculating with sigmomEdw for E = 69.07 keV
+0.02134304043309591
+Calculating with sigmomEdw for E = 70.04 keV
+0.021140858000744167
+Calculating with sigmomEdw for E = 71.01 keV
+0.02094523320664534
+Calculating with sigmomEdw for E = 71.98 keV
+0.02075590162497584
+Calculating with sigmomEdw for E = 72.95 keV
+0.02057261256001108
+Calculating with sigmomEdw for E = 73.92 keV
+0.02039512812021335
+Calculating with sigmomEdw for E = 74.89 keV
+0.02022322242112401
+Calculating with sigmomEdw for E = 75.86 keV
+0.0200566808436235
+Calculating with sigmomEdw for E = 76.83 keV
+0.019895302604856422
+Calculating with sigmomEdw for E = 77.80 keV
+0.019738885722188966
+Calculating with sigmomEdw for E = 78.77 keV
+0.019587250221913575
+Calculating with sigmomEdw for E = 79.74 keV
+0.01944021997921538
+Calculating with sigmomEdw for E = 80.71 keV
+0.01929762549689737
+Calculating with sigmomEdw for E = 81.68 keV
+0.019159310143237494
+Calculating with sigmomEdw for E = 82.65 keV
+0.019025118737720705
+Calculating with sigmomEdw for E = 83.62 keV
+0.018894905473679013
+Calculating with sigmomEdw for E = 84.59 keV
+0.018768531113390184
+Calculating with sigmomEdw for E = 85.56 keV
+0.018645862294220605
+Calculating with sigmomEdw for E = 86.53 keV
+0.018526771704308085
+Calculating with sigmomEdw for E = 87.50 keV
+0.0184111376814634
+Calculating with sigmomEdw for E = 88.47 keV
+0.01829884315305708
+Calculating with sigmomEdw for E = 89.44 keV
+0.018189776734640034
+Calculating with sigmomEdw for E = 90.41 keV
+0.01808383103269047
+Calculating with sigmomEdw for E = 91.38 keV
+0.017980903565026796
+Calculating with sigmomEdw for E = 92.35 keV
+0.017880895893032996
+Calculating with sigmomEdw for E = 93.32 keV
+0.017783713510592207
+Calculating with sigmomEdw for E = 94.29 keV
+0.017689265619407677
+Calculating with sigmomEdw for E = 95.26 keV
+0.01759746561151514
+Calculating with sigmomEdw for E = 96.23 keV
+0.017508229477597132
+Calculating with sigmomEdw for E = 97.20 keV
+0.01742147699636676
+Calculating with sigmomEdw for E = 98.17 keV
+0.017337131011152623
+Calculating with sigmomEdw for E = 99.14 keV
+0.017255117094784753
+Calculating with sigmomEdw for E = 100.11 keV
+0.017175363927612045
+Calculating with sigmomEdw for E = 101.08 keV
+0.017097802440110072
+Calculating with sigmomEdw for E = 102.05 keV
+0.01702236680382257
+Calculating with sigmomEdw for E = 103.02 keV
+0.016948993059005484
+Calculating with sigmomEdw for E = 103.98 keV
+0.01687761982026233
+Calculating with sigmomEdw for E = 104.95 keV
+0.016808187906177254
+Calculating with sigmomEdw for E = 105.92 keV
+0.01674064026514986
+Calculating with sigmomEdw for E = 106.89 keV
+0.01667492188698253
+Calculating with sigmomEdw for E = 107.86 keV
+0.01661097971122036
+Calculating with sigmomEdw for E = 108.83 keV
+0.01654876254635812
+Calculating with sigmomEdw for E = 109.80 keV
+0.016488220996406195
+Calculating with sigmomEdw for E = 110.77 keV
+0.01642930736436078
+Calculating with sigmomEdw for E = 111.74 keV
+0.016371975609727214
+Calculating with sigmomEdw for E = 112.71 keV
+0.01631618124146497
+Calculating with sigmomEdw for E = 113.68 keV
+0.016261881309749652
+Calculating with sigmomEdw for E = 114.65 keV
+0.016209034274443604
+Calculating with sigmomEdw for E = 115.62 keV
+0.016157599999471552
+Calculating with sigmomEdw for E = 116.59 keV
+0.01610753968625891
+Calculating with sigmomEdw for E = 117.56 keV
+0.01605881580705367
+Calculating with sigmomEdw for E = 118.53 keV
+0.016011392054751935
+Calculating with sigmomEdw for E = 119.50 keV
+0.01596523330661184
+Calculating with sigmomEdw for E = 120.47 keV
+0.015920305580004273
+Calculating with sigmomEdw for E = 121.44 keV
+0.015876575978958522
+Calculating with sigmomEdw for E = 122.41 keV
+0.0158340126428317
+Calculating with sigmomEdw for E = 123.38 keV
+0.015792584735359994
+Calculating with sigmomEdw for E = 124.35 keV
+0.01575226238443064
+Calculating with sigmomEdw for E = 125.32 keV
+0.015713016653175566
+Calculating with sigmomEdw for E = 126.29 keV
+0.015674819474540243
+Calculating with sigmomEdw for E = 127.26 keV
+0.015637643711324777
+Calculating with sigmomEdw for E = 128.23 keV
+0.015601462994386962
+Calculating with sigmomEdw for E = 129.20 keV
+0.015566251793453879
+Calculating with sigmomEdw for E = 130.17 keV
+0.015531985335673647
+Calculating with sigmomEdw for E = 131.14 keV
+0.015498639600753265
+Calculating with sigmomEdw for E = 132.11 keV
+0.015466191301650207
+Calculating with sigmomEdw for E = 133.08 keV
+0.01543461782132725
+Calculating with sigmomEdw for E = 134.05 keV
+0.015403897215083884
+Calculating with sigmomEdw for E = 135.02 keV
+0.015374008223891003
+Calculating with sigmomEdw for E = 135.99 keV
+0.015344930149500715
+Calculating with sigmomEdw for E = 136.96 keV
+0.015316642943333434
+Calculating with sigmomEdw for E = 137.93 keV
+0.015289127117950907
+Calculating with sigmomEdw for E = 138.90 keV
+0.015262363740975414
+Calculating with sigmomEdw for E = 139.87 keV
+0.015236334445135967
+Calculating with sigmomEdw for E = 140.84 keV
+0.015211021382877856
+Calculating with sigmomEdw for E = 141.81 keV
+0.015186407189627769
+Calculating with sigmomEdw for E = 142.78 keV
+0.01516247664747987
+Calculating with sigmomEdw for E = 143.75 keV
+0.01513921053953362
+Calculating with sigmomEdw for E = 144.72 keV
+0.01511659100538775
+Calculating with sigmomEdw for E = 145.69 keV
+0.015094609743871626
+Calculating with sigmomEdw for E = 146.66 keV
+0.015073246016365883
+Calculating with sigmomEdw for E = 147.63 keV
+0.015052488649175324
+Calculating with sigmomEdw for E = 148.60 keV
+0.015032318359030067
+Calculating with sigmomEdw for E = 149.57 keV
+0.015012727255058846
+Calculating with sigmomEdw for E = 150.54 keV
+0.014993695488200561
+Calculating with sigmomEdw for E = 151.51 keV
+0.014975215312450597
+Calculating with sigmomEdw for E = 152.48 keV
+0.014957276861917968
+Calculating with sigmomEdw for E = 153.45 keV
+0.014939857183873414
+Calculating with sigmomEdw for E = 154.42 keV
+0.014922952129893663
+Calculating with sigmomEdw for E = 155.39 keV
+0.014906547885047736
+Calculating with sigmomEdw for E = 156.36 keV
+0.01489063301383181
+Calculating with sigmomEdw for E = 157.33 keV
+0.014875196348324895
+Calculating with sigmomEdw for E = 158.30 keV
+0.01486022704071219
+Calculating with sigmomEdw for E = 159.27 keV
+0.014845714504237576
+Calculating with sigmomEdw for E = 160.24 keV
+0.014831648438245287
+Calculating with sigmomEdw for E = 161.21 keV
+0.014818018801039761
+Calculating with sigmomEdw for E = 162.18 keV
+0.01480481582867696
+Calculating with sigmomEdw for E = 163.15 keV
+0.014792029979520976
+Calculating with sigmomEdw for E = 164.12 keV
+0.014779650836146147
+Calculating with sigmomEdw for E = 165.09 keV
+0.01476767343305733
+Calculating with sigmomEdw for E = 166.06 keV
+0.014756085501489151
+Calculating with sigmomEdw for E = 167.03 keV
+0.014744875446142027
+Calculating with sigmomEdw for E = 167.99 keV
+0.01473404063644779
+Calculating with sigmomEdw for E = 168.96 keV
+0.014723571761757497
+Calculating with sigmomEdw for E = 169.93 keV
+0.014713456384021915
+Calculating with sigmomEdw for E = 170.90 keV
+0.014703691802664728
+Calculating with sigmomEdw for E = 171.87 keV
+0.014694269974255256
+Calculating with sigmomEdw for E = 172.84 keV
+0.01468518059791075
+Calculating with sigmomEdw for E = 173.81 keV
+0.01467642190443729
+Calculating with sigmomEdw for E = 174.78 keV
+0.014667979760636921
+Calculating with sigmomEdw for E = 175.75 keV
+0.01465985184334849
+Calculating with sigmomEdw for E = 176.72 keV
+0.014652029507092747
+Calculating with sigmomEdw for E = 177.69 keV
+0.014644505332960484
+Calculating with sigmomEdw for E = 178.66 keV
+0.014637276115147929
+Calculating with sigmomEdw for E = 179.63 keV
+0.01463033405806704
+Calculating with sigmomEdw for E = 180.60 keV
+0.014623673105775514
+Calculating with sigmomEdw for E = 181.57 keV
+0.014617287326287177
+Calculating with sigmomEdw for E = 182.54 keV
+0.014611170910326455
+Calculating with sigmomEdw for E = 183.51 keV
+0.014605318217307263
+Calculating with sigmomEdw for E = 184.48 keV
+0.014599723723605365
+Calculating with sigmomEdw for E = 185.45 keV
+0.01459438204147513
+Calculating with sigmomEdw for E = 186.42 keV
+0.01458928789684502
+Calculating with sigmomEdw for E = 187.39 keV
+0.014584436153554217
+Calculating with sigmomEdw for E = 188.36 keV
+0.014579821790244595
+Calculating with sigmomEdw for E = 189.33 keV
+0.01457544072886568
+Calculating with sigmomEdw for E = 190.30 keV
+0.01457128507085885
+Calculating with sigmomEdw for E = 191.27 keV
+0.014567355420139325
+Calculating with sigmomEdw for E = 192.24 keV
+0.014563641512194518
+Calculating with sigmomEdw for E = 193.21 keV
+0.014560143399658642
+Calculating with sigmomEdw for E = 194.18 keV
+0.01455685375391905
+Calculating with sigmomEdw for E = 195.15 keV
+0.01455376981005184
+Calculating with sigmomEdw for E = 196.12 keV
+0.014550885848869408
+Calculating with sigmomEdw for E = 197.09 keV
+0.014548201290669248
+Calculating with sigmomEdw for E = 198.06 keV
+0.014545707354639212
+Calculating with sigmomEdw for E = 199.03 keV
+0.014543404413395066
+Calculating with sigmomEdw for E = 200.00 keV
+0.014541289057549615
+GGA3/NR/4.0/1.000E-04/0.035/000/
+True
