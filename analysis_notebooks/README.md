@@ -35,10 +35,6 @@ to be named
 ## Comparison of Dougherty silicon yield variance measurement to Lindhard <br/>
 silicon_Fano.ipynb
 
-## Calculation of the 2-dimensional Ep, Eq joint distribution <br/>
-EpEq_2D_joint.ipynb<br/>
-addendum -- EpEq_calc_contours.ipynb<br/>
-
 <!--- [comment]: # the following moved to a subsequent publication --->
 <!--- [comment]: # ## Dark Matter limit comparison given different Fano estimates <br/> --->
 <!--- [comment]: # to be named --->
