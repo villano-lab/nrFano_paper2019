@@ -28,3 +28,4 @@ def test():
     _exec_notebook('EpEq_2D_joint.ipynb')
     _exec_notebook('EpEq_calc_contours.ipynb')
     _exec_notebook('edelweiss_res.ipynb')
+    _exec_notebook('edelweiss_yield_fromData_GGA1.ipynb')
