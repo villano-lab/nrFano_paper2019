@@ -136,13 +136,13 @@ def RWCalc(filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/1000
  
   path='{}/{}/{}/{}/{}/{}/'.format(det,band,Vs,alphas,aHs,Fs)
 
-  print(path)
+  #print(path)
 
   #check for path
   f = h5py.File(filename,'a')
   exEr = path+'Er' in f
   exsig = path+'sig' in f
-  print(exEr)
+  #print(exEr)
  
 
   #make some vector
