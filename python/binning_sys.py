@@ -46,9 +46,9 @@ def getBinSys(C,m,filename='data/res_calc.h5',bins = [5, 10, 20, 30, 40, 50, 70,
       pq_mean = lambda Q,El,Eh: Q*pq_norm(Q,El,Eh)
       pq_std = lambda Q,El,Eh: Q**2*pq_norm(Q,El,Eh)
     
-      a = quad(pq_norm,-5,5,limit=100,args=(l,h,))
-      b = quad(pq_mean,-5,5,limit=100,args=(l,h,))
-      c = quad(pq_std,-5,5,limit=100,args=(l,h,))
+      a = quad(pq_norm,-1,5,limit=100,args=(l,h,))
+      b = quad(pq_mean,-1,5,limit=100,args=(l,h,))
+      c = quad(pq_std,-1,5,limit=100,args=(l,h,))
     
       Emid = (h+l)/2.0
       Ec[i] = Emid
