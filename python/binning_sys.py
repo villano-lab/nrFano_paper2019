@@ -65,3 +65,66 @@ def getBinSys(C,m,filename='data/res_calc.h5',bins = [5, 10, 20, 30, 40, 50, 70,
     
 
     return Ec, delta
+
+def saveBinSys(Nsamp=100,filename='data/mcmc_fits.h5',outfile=None,bins = [5, 10, 20, 30, 40, 50, 70, 150]):
+
+    if outfile is None:
+      outfile = filename
+
+
+    #get some mcmc info:
+    f = h5py.File(filename,'r')
+    
+    #save the results for the Edw fit
+    path='{}/{}/'.format('mcmc','edwdata')
+    
+    Cms = np.asarray(f[path+'Cms'])
+    slope = np.asarray(f[path+'m'])
+    samples = np.asarray(f[path+'samples'])
+    sampsize = np.asarray(f[path+'sampsize'])
+    xl = np.asarray(f[path+'Er'])
+    upvec = np.asarray(f[path+'Csig_u'])
+    dnvec = np.asarray(f[path+'Csig_l'])
+    Sigss = np.asarray(f[path+'Sigss'])
+    
+    f.close()
+
+    print(bins)
+    delta = lambda C,m: getBinSys(C,m,bins=bins)[1]
+    deltav = np.vectorize(delta)
+    
+    #Csamp = np.zeros((100,))
+    #msamp = np.zeros((100,))
+    print(np.shape(samples[np.random.randint(len(samples), size=Nsamp)]))
+    Candm = samples[np.random.randint(len(samples), size=Nsamp)]
+    
+    #print(Candm[:,0])
+    #print(Candm[:,1])
+    deli = [deltav(Candm[i,0],Candm[i,1]) for i in range(Nsamp)]
+    deli = np.array(deli)
+    print(deli)
+
+    #save the results for the MS fit
+    path='{}/{}/'.format('mcmc','edwdata_binsys')
+    
+    
+    #remove vars
+    f = h5py.File(outfile,'a')
+    exbins = path+'bins_binsys' in f
+    exsys = path+'binsys' in f
+
+    if exbins:
+      del f[path+'bins_binsys']
+    if exsys:
+      del f[path+'binsys']
+    
+    dset = f.create_dataset(path+'bins_binsys',np.shape(bins),dtype=np.dtype('float64').type, \
+    compression="gzip",compression_opts=9)
+    dset[...] = bins 
+    dset = f.create_dataset(path+'binsys',np.shape(deli),dtype=np.dtype('float64').type, \
+    compression="gzip",compression_opts=9)
+    dset[...] = deli 
+    
+    f.close() 
+
+    return
