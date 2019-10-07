@@ -1,6 +1,7 @@
 import subprocess
 import tempfile
-
+import papermill as pm
+import os.path as path
 
 def _exec_notebook(path):
     with tempfile.NamedTemporaryFile(suffix=".ipynb") as fout:
@@ -9,6 +10,11 @@ def _exec_notebook(path):
                 "--ExecutePreprocessor.kernel_name=python3",
                 "--output", fout.name, path]
         subprocess.check_call(args)
+
+
+def _exec_papermill(input_nb, args):
+    output_nb = path.join('test',input_nb)
+    pm.execute_notebook(input_nb, output_nb, parameters=args)
 
 
 def test():
@@ -25,5 +31,6 @@ def test():
     _exec_notebook('yield_width_compare.ipynb')
     _exec_notebook('fitting_errors.ipynb')
     _exec_notebook('bin_centering_correction.ipynb')
-    _exec_notebook('edelweiss_res.ipynb')
+    _exec_papermill('edelweiss_res.ipynb', None)
+    _exec_papermill('edelweiss_C_systematicErrors_allParameters.ipynb', {'Test': True})
     _exec_notebook('edelweiss_yield_fromData_GGA1.ipynb')
