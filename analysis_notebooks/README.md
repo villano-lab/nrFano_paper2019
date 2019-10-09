@@ -1,4 +1,4 @@
-# The following nortebooks are summaries of the main logic of the NR Fano paper [![Build Status](https://travis-ci.com/villaa/nrFano_Constraint.svg?token=dDJNAzywngCDqUAtL9D9&branch=master)](https://travis-ci.com/villaa/nrFano_Constraint)
+# The following nortebooks are summaries of the main logic of the NR Fano paper [![Build Status](https://travis-ci.com/villano-lab/nrFano_paper2019.svg?branch=master)](https://travis-ci.com/villano-lab/nrFano_paper2019)
 
 ## Analysis Overview with Paper Figures
 nrFano_paper.ipynb
