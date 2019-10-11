@@ -10,6 +10,12 @@ conda env create -f nr_fano_env.yml
 conda activate nr_fano
 ```
 
+Rarely, the environment configuration may change.  To update your nr_fano environment:
+
+```
+conda env update --file nr_fano_env.yml
+```
+
 # Running tests
 
 If you've made changes to the code, you can check that you haven't broken anything by:
