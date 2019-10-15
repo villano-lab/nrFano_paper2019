@@ -122,6 +122,22 @@ def get_sig_nuc_func(FWHM_center, FWHM_guard, FWHM122_ion, FWHM0_heat, FWHM122_h
     return partial(get_sig_neutron, sigI, sigH, pars, C)
 
 def get_sig_nuc_func_alt(FWHM_center, FWHM_guard, FWHM122_ion, FWHM0_heat, FWHM122_heat, pars, aH=None, C=None, m=None):
+    """
+    # GGA3 parameters from Edelweiss tables
+    ion_center_0keV = 1.3
+    ion_guard_0keV = 1.5
+    heat_0keV = 0.4
+    ion_122keV = 3.1 
+    heat_122keV = 2.7
+    par_dict = {'V' : scale*4.0,'eps_eV' : 3.0, 'a': A, 'b': B}
+    
+    sigER_func = get_sig_gamma_func(ion_center_0keV, ion_guard_0keV, ion_122keV, heat_0keV, heat_122keV, \
+                                    par_dict, aH)
+    
+    sigNR_func = get_sig_nuc_func_alt(ion_center_0keV, ion_guard_0keV, ion_122keV, heat_0keV, heat_122keV, \
+                                      par_dict, aH, C, m)
+    """
+    
     # get the ionization resolution function
     sigI = get_ionRes_func(FWHM_center, FWHM_guard, FWHM122_ion)
     
