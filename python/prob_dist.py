@@ -355,6 +355,9 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
       mean = 0.16*Er**0.18
 
     norm = quad(gF,-1,4,args=(Er,))[0]
+    #norm10 = 10.32813952
+
+    #norm = norm10*(np.exp(-alpha*Er)/np.exp(-alpha*10))
     #print(norm)
 
 
@@ -372,7 +375,7 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
     mean = quad(meanfun,-1,4)[0]
     #print(mean)
 
-    intyF = lambda a: quad(Qdist,mean-a,mean+a,limit=100)[0]
+    #intyF = lambda a: quad(Qdist,mean-a,mean+a,limit=100)[0]
 
 
     #minsigF = lambda a: intyF(a) - 0.6827 #one sigma
