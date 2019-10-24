@@ -332,7 +332,7 @@ def sigrootEdw(F,Er,V,eps,alpha=(1/100),Qbar=lambda x: 0.16*x**0.18,aH=0.0381):
     return rootF 
 
 #set the Edelweiss sigma (second central moment) definition to default to NR band
-def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)):
+def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100), A=0.16, B=0.18):
 
     #get the resolutions
     sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
@@ -350,9 +350,9 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
       gF = expband_2D(fF,alpha,3)
       mean = 1
     else:
-      fF = QEr_v2_2D_fast(sigHv,sigIv,V,eps,F,Qbar=lambda x: 0.16*x**0.18)
+      fF = QEr_v2_2D_fast(sigHv,sigIv,V,eps,F,Qbar=lambda x: A*x**B)
       gF = expband_2D(fF,alpha,1.5)
-      mean = 0.16*Er**0.18
+      mean = A*Er**B
 
     norm = quad(gF,-1,4,args=(Er,))[0]
     #norm10 = 10.32813952
