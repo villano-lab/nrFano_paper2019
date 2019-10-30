@@ -336,7 +336,7 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
 
     #get the resolutions
     sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
-    er.getEdw_det_res(label,V,'data/edw_res_data.txt',aH,C=None)
+    er.getEdw_det_res(label,V,'data/edw_res_data.txt',aH,C=None, A=A, B=B)
 
 
     #energy constant
