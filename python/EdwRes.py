@@ -192,13 +192,13 @@ def getEdw_res_pars(infile='data/edw_res_data.txt'):
 
     return outdic
 
-def getEdw_det_res(label='GGA3',V=4.0,infile='data/edw_res_data.txt',aH=None,C=None):
+def getEdw_det_res(label='GGA3',V=4.0,infile='data/edw_res_data.txt',aH=None,C=None, A=0.16, B=0.18):
 
     eps=3.0
 
     #yield models
-    a=0.16
-    b=0.18
+    a=A
+    b=B
     Qbar = lambda Er: a*Er**b
     Qer = lambda Er: 1
 
