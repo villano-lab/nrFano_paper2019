@@ -389,3 +389,42 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
     #return norm,rootF,(np.sqrt(q2-mean**2)) 
     return (np.sqrt(q2-mean**2)) 
 
+#analytical distributions for QEr
+def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  
+  eps = 3.0
+  #get the resolutions
+  sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
+  er.getEdw_det_res(label,V,'data/edw_res_data.txt',aH,C=None, A=A, B=B)
+
+  #calculate basic variables
+  scale = (V/eps)
+  sa = 2*((1+scale)*sigH_NRv(Er))**2
+  sb = 2*sigI_NRv(Er)**2
+  sc = 2*(eps/1000.0)*F*Er*(A*Er**B) #careful with units, eps units need to be converted to pair/keV here
+
+  print('sa: {}'.format(sa))
+  print('sb: {}'.format(sb))
+  print('sc: {}'.format(sc))
+
+  #denomonators from N-MISC-19-001 pg 59,60
+  denom_abc = 4*(sb + sc + 2*A*Er**B*scale*sb + A**2*Er**(2*B)*(sa+scale**2*sb))
+  denom_de = 2*(sa*(sb+sc) + scale**2*sb*sc)*(np.sqrt((sb + sc + 2*A*Er**B*scale*sb + A**2*Er**(2*B)*(sa+scale**2*sb))/ \
+       (sa*(sb+sc) + scale**2*sb*sc)))
+
+  #now get the distribution constants
+  inv_aq = 2*np.sqrt(np.pi)*np.sqrt(sa*sb)*np.sqrt((sc/sb) + 1 + scale**2*(sc/sa)) \
+      *np.sqrt((sb + sc + 2*A*Er**B*scale*sb + A**2*Er**(2*B)*(sa+scale**2*sb))/(sa*(sb+sc) + scale**2*sb*sc))*alpha*(eps/1000.0)
+  aq = np.abs(Er)*(1/inv_aq)*np.exp(((sa*(sb+sc)+scale**2*sb*sc)*alpha**2 - 4*A**2*Er**(2+2*B) - 4*Er*(sb+sc)*alpha -4*A*Er**(1+B)*scale*sb*alpha)/denom_abc)
+  bq = (8*Er*A*Er**(1+B) - 4*Er*scale*sb*alpha - 4*A*Er**(1+B)*sa - 4*A*Er**(1+B)*scale**2*sb*alpha)/denom_abc
+  cq = 4*Er**2/denom_abc
+  dq = (2*Er*(sb+sa) + 2*A*Er**(1+B)*scale*sb - sa*(sb+sc)*alpha - scale**2*sb*sc*alpha)/denom_de
+  eq = (2*Er*scale*sb + 2*A*Er**(1+B)*(sa + scale**2*sb))/denom_de
+
+  print('aq: {}'.format(aq))
+  print('bq: {}'.format(bq))
+  print('cq: {}'.format(cq))
+  print('dq: {}'.format(dq))
+  print('eq: {}'.format(eq))
+
+  return aq*np.exp((bq-cq*Q)*Q)*(1+erf(dq+eq*Q))
