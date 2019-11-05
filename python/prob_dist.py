@@ -421,10 +421,20 @@ def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=
   dq = (2*Er*(sb+sc) + 2*A*Er**(1+B)*scale*sb - sa*(sb+sc)*alpha - scale**2*sb*sc*alpha)/denom_de
   eq = (2*Er*scale*sb + 2*A*Er**(1+B)*(sa + scale**2*sb))/denom_de
 
+  #transformation variables
+  atq = cq/eq**2
+  btq = ((bq/eq) + (2*cq*dq/eq**2))
+  ctq = ((bq*dq/eq) + (cq*dq**2/eq**2))
+  alpha_q = np.sqrt(atq)
+  beta_q = - (btq/(2*np.sqrt(atq)))
+  inv_norm = np.exp((btq**2/(4*atq)) - ctq)*np.sqrt(np.pi)*(1/alpha_q)*(1-erf(beta_q/(np.sqrt(alpha_q**2+1))))
+  norm = eq/inv_norm/aq
+
   print('aq: {}'.format(aq))
   print('bq: {}'.format(bq))
   print('cq: {}'.format(cq))
   print('dq: {}'.format(dq))
   print('eq: {}'.format(eq))
+  print('norm: {}'.format(norm))
 
   return aq*np.exp((bq-cq*Q)*Q)*(1+erf(dq+eq*Q))
