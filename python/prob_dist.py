@@ -8,7 +8,6 @@ import EdwRes as er
 
 
 
-
 # returns the probability of z, where z is the yield
 # z = Eq/(Ep - k*Eq)
 # this distribution assumes that Eq and Ep are independent, 
@@ -514,9 +513,9 @@ def analytical_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.1
   sb = 2*sigI_NRv(Er)**2
   sc = 2*(eps/1000.0)*F*Er*(A*Er**B) #careful with units, eps units need to be converted to pair/keV here
 
-  print('sa: {}'.format(sa))
-  print('sb: {}'.format(sb))
-  print('sc: {}'.format(sc))
+  #print('sa: {}'.format(sa))
+  #print('sb: {}'.format(sb))
+  #print('sc: {}'.format(sc))
 
   #denomonators from N-MISC-19-001 pg 59,60
   denom_abc = 4*(sb + sc + 2*A*Er**B*scale*sb + A**2*Er**(2*B)*(sa+scale**2*sb))
@@ -541,28 +540,32 @@ def analytical_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.1
   inv_norm = np.exp((btq**2/(4*atq)) - ctq)*np.sqrt(np.pi)*(1/alpha_q)*(1-erf(beta_q/(np.sqrt(alpha_q**2+1))))
   norm = eq/inv_norm/aq
 
-  print('aq: {}'.format(aq))
-  print('bq: {}'.format(bq))
-  print('cq: {}'.format(cq))
-  print('dq: {}'.format(dq))
-  print('eq: {}'.format(eq))
-  print('norm: {}'.format(norm))
-  print('beta_q: {}'.format(beta_q))
-  print('sqrt(alpha_q^2+1): {}'.format(np.sqrt(alpha_q**2+1)))
-  print('exp: {}'.format(np.exp(-(beta_q/np.sqrt(alpha_q**2+1))**2)))
+  #print('aq: {}'.format(aq))
+  #print('bq: {}'.format(bq))
+  #print('cq: {}'.format(cq))
+  #print('dq: {}'.format(dq))
+  #print('eq: {}'.format(eq))
+  #print('norm: {}'.format(norm))
+  #print('beta_q: {}'.format(beta_q))
+  #print('sqrt(alpha_q^2+1): {}'.format(np.sqrt(alpha_q**2+1)))
+  #print('exp: {}'.format(np.exp(-(beta_q/np.sqrt(alpha_q**2+1))**2)))
 
   #calculate the mean see pg. 67 of N-MISC-19-001
   #term 1 of d^2K/dt^2 evaluated at t=0
   T1 = (1/(2*atq*eq**2)) 
   #term 2 evaluated at t=0
-  T2 = ((1/(1-erf(beta_q/(np.sqrt(alpha_q**2+1)))))*(2/np.sqrt(np.pi))*(1/np.sqrt(alpha_q**2+1))*(1/(2*np.sqrt(atq)*eq))*np.exp(-(beta_q/np.sqrt(alpha_q**2+1))**2))
+  T2 = -((1/(1-erf(beta_q/(np.sqrt(alpha_q**2+1)))))*(2/np.sqrt(np.pi))*(1/np.sqrt(alpha_q**2+1))*(1/(2*np.sqrt(atq)*eq))**2 \
+      *((2*beta_q)/np.sqrt(alpha_q**2+1))*np.exp(-(beta_q/np.sqrt(alpha_q**2+1))**2))
+  #term 3 evaluated at t=0
+  T3 = -((1/(1-erf(beta_q/(np.sqrt(alpha_q**2+1)))))*(2/np.sqrt(np.pi))*(1/np.sqrt(alpha_q**2+1))*(1/(2*np.sqrt(atq)*eq))*np.exp(-(beta_q/np.sqrt(alpha_q**2+1))**2))**2
 
-  print('T1: {}'.format(T1))
-  print('T2: {}'.format(T2))
-  print('varNR: {}'.format(sigQnrv(100)))
-  print('varER: {}'.format(sigQerv(100)))
+  #print('T1: {}'.format(T1))
+  #print('T2: {}'.format(T2))
+  #print('T3: {}'.format(T3))
+  #print('sigNR: {}'.format(sigQnrv(Er)))
+  #print('sigER: {}'.format(sigQerv(Er)))
 
-  return T1
+  return T1+T2+T3
 
 
 # The function below will compute the HPD interval. 
