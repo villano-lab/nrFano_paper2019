@@ -563,3 +563,48 @@ def analytical_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.1
   print('varER: {}'.format(sigQerv(100)))
 
   return T1
+
+
+# The function below will compute the HPD interval. 
+# The idea is that we rank-order the MCMC trace. 
+# We know that the number of samples that are included in the HPD is 
+# 0.95 times the total number of MCMC sample. We then consider all intervals 
+# that contain that many samples and find the shortest one.
+# From http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2015/tutorials/l06_credible_regions.html
+# pymc3 also has an hpd function defined 
+def hpd(trace, mass_frac) :
+    """
+    Returns highest probability density region given by
+    a set of samples.
+
+    Parameters
+    ----------
+    trace : array
+        1D array of MCMC samples for a single variable
+    mass_frac : float with 0 < mass_frac <= 1
+        The fraction of the probability to be included in
+        the HPD.  For example, `massfrac` = 0.95 gives a
+        95% HPD.
+        
+    Returns
+    -------
+    output : array, shape (2,)
+        The bounds of the HPD
+    """
+    # Get sorted list
+    d = np.sort(np.copy(trace))
+
+    # Number of total samples taken
+    n = len(trace)
+    
+    # Get number of samples that should be included in HPD
+    n_samples = np.floor(mass_frac * n).astype(int)
+    
+    # Get width (in units of data) of all intervals with n_samples samples
+    int_width = d[n_samples:] - d[:n-n_samples]
+    
+    # Pick out minimal interval
+    min_int = np.argmin(int_width)
+    
+    # Return interval
+    return np.array([d[min_int], d[min_int+n_samples]])
