@@ -599,15 +599,18 @@ def hpd(trace, mass_frac) :
 
     # Number of total samples taken
     n = len(trace)
+    #print (n)
     
     # Get number of samples that should be included in HPD
     n_samples = np.floor(mass_frac * n).astype(int)
+    #print (n_samples)
     
     # Get width (in units of data) of all intervals with n_samples samples
     int_width = d[n_samples:] - d[:n-n_samples]
     
     # Pick out minimal interval
     min_int = np.argmin(int_width)
+    #print (min_int)
     
     # Return interval
     return np.array([d[min_int], d[min_int+n_samples]])
