@@ -584,17 +584,29 @@ def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,la
   TEdw = (1/Er**2)*(eps*1e-3*qbar*Er*F + chi**2*qbar**2*sigH_NRv(Er)**2 + (1+omega*qbar)**2*sigI_NRv(Er)**2)
 
   #Get qbar cross-terms
-  T1 = (1/Er**2)*(1/2)*(qbar**2*chi**2*sigH_NRv(Er)**2 + (qbar**2*omega**2+2*qbar*omega)*sigI_NRv(Er)**2)
+  T1 = (1/Er**2)*(qbar**2*chi**2*sigH_NRv(Er)**2 + (qbar**2*omega**2+2*qbar*omega)*sigI_NRv(Er)**2)
 
+  #Get mixed second derivatives
+  T2 = (1/Er**4)*(4*qbar**2*chi**2*omega**2+chi**2+2*qbar*chi**2*omega)*sigH_NRv(Er)**2*sigI_NRv(Er)**2
+
+  #Get pure second derivatives
+  T3 = (1/Er**4)*(1/2)*(4*qbar**2*chi**4*sigH_NRv(Er)**4 + (4*qbar**2*omega**4+4*qbar*omega**3+4*omega**2)*sigI_NRv(Er)**4)
+
+  #third derivatives have a couple terms that are of the same order in 1/Er
+  T4 = (1/Er**4)*((1+qbar*omega)*(2*chi**2+6*qbar*chi**2*omega) + (qbar*chi)*(4*omega*chi+6*qbar*omega**2*chi))*sigH_NRv(Er)**2*sigI_NRv(Er)**2
 
   print('TEdw: {}'.format(TEdw))
+  print('sqrt(TEdw): {}'.format(np.sqrt(TEdw)))
   print('T1: {}'.format(T1))
-  print('Ta: {}'.format((1/Er**2)*(1/2)*qbar**2*chi**2*sigH_NRv(Er)**2)) 
-  print('Tb: {}'.format((1/Er**2)*(1/2)*(qbar**2*omega**2)*sigI_NRv(Er)**2)) 
-  print('Tc: {}'.format((1/Er**2)*(1/2)*(2*qbar*omega)*sigI_NRv(Er)**2)) 
-  #print('T3: {}'.format(T3))
+  #print('Ta: {}'.format((1/Er**2)*(1/2)*qbar**2*chi**2*sigH_NRv(Er)**2)) 
+  #print('Tb: {}'.format((1/Er**2)*(1/2)*(qbar**2*omega**2)*sigI_NRv(Er)**2)) 
+  #print('Tc: {}'.format((1/Er**2)*(1/2)*(2*qbar*omega)*sigI_NRv(Er)**2)) 
+  print('T2: {}'.format(T2))
+  print('T3: {}'.format(T3))
+  print('T4: {}'.format(T4))
 
-  return TEdw+T1 
+  #return TEdw+T2+T3 
+  return TEdw+T2+T3+T4
 
 
 # The function below will compute the HPD interval. 
