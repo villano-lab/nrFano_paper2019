@@ -567,6 +567,35 @@ def analytical_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.1
 
   return T1+T2+T3
 
+def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  
+  eps = 3.0
+  #get the resolutions
+  sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
+  er.getEdw_det_res(label,V,'data/edw_res_data.txt',aH,C=None, A=A, B=B)
+
+  #calculate basic variables
+  scale = (V/eps)
+  qbar = A*Er**B
+  chi = (1+scale)
+  omega = scale
+
+  #Get Edw terms
+  TEdw = (1/Er**2)*(eps*1e-3*qbar*Er*F + chi**2*qbar**2*sigH_NRv(Er)**2 + (1+omega*qbar)**2*sigI_NRv(Er)**2)
+
+  #Get qbar cross-terms
+  T1 = (1/Er**2)*(1/2)*(qbar**2*chi**2*sigH_NRv(Er)**2 + (qbar**2*omega**2+2*qbar*omega)*sigI_NRv(Er)**2)
+
+
+  print('TEdw: {}'.format(TEdw))
+  print('T1: {}'.format(T1))
+  print('Ta: {}'.format((1/Er**2)*(1/2)*qbar**2*chi**2*sigH_NRv(Er)**2)) 
+  print('Tb: {}'.format((1/Er**2)*(1/2)*(qbar**2*omega**2)*sigI_NRv(Er)**2)) 
+  print('Tc: {}'.format((1/Er**2)*(1/2)*(2*qbar*omega)*sigI_NRv(Er)**2)) 
+  #print('T3: {}'.format(T3))
+
+  return TEdw+T1 
+
 
 # The function below will compute the HPD interval. 
 # The idea is that we rank-order the MCMC trace. 
