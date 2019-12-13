@@ -6,6 +6,12 @@ import resfuncRead as rfr
 import scipy.optimize as so
 import EdwRes as er
 
+#all needed for diff mapping and nothing else
+import fano_calc as fc
+import h5py
+import scipy.interpolate as inter
+import time
+
 
 
 # returns the probability of z, where z is the yield
@@ -663,3 +669,107 @@ def hpd(trace, mass_frac) :
     
     # Return interval
     return np.array([d[min_int], d[min_int+n_samples]])
+
+#map out the difference between our corrected series approx and the numerical integration in sigmomEdw
+def diffmap(pars,Etest=25.0,outfile='data/diffmap.h5',diff0file='data/sig_diffs.h5'):
+    """
+    Returns and saves a structure holding computed differences
+    between sigmomEdw and series approx.
+    
+
+    Parameters
+    ----------
+    pars : array
+        (N,4) numpy array holding 4 parameters in each row:
+        A,B,aH,mu (fractional voltage variation). 
+    Etest : double 
+        Energy test point in keV. 
+        default: 25.0 keV 
+    outfile : string 
+        fullpath and filename of output file. 
+        default: data/diffmap.h5' 
+    diff0file : string 
+        fullpath and filename of file storing zeroth order diffs. 
+        default: data/diffmap.h5' 
+        
+    Returns
+    -------
+    output : array, shape (N,1)
+        The differences for each row of params 
+    """
+
+    #if parameters not supplied correctly
+    if np.shape(pars)[1] != 4:
+      print('Too few columns, need 4 params')
+      return np.zeros((0,1))
+
+    output = np.zeros((np.shape(pars)[0],1))
+    frac = np.zeros((np.shape(pars)[0],1))
+
+    #get sigQ for for nominal parameters
+    Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+
+    #get first order correction
+    f = h5py.File(diff0file,'r')
+
+    #save the results for the Edw fit
+    path='{}/'.format('NR')
+
+    dsig = np.asarray(f[path+'dsig'])
+    Er = np.asarray(f[path+'Er'])
+
+    f.close()
+
+    #spline those diffs
+    sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
+    sig_corr = inter.InterpolatedUnivariateSpline(Er, sig0(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0))), k=3)
+    sig_corr_v = np.vectorize(sig_corr)
+    print(sig_corr_v(150))
+
+    for i in np.arange(np.shape(output)[0]):
+      p = pars[i,:]
+      start = time.time()
+      sig_res = sigmomEdw(Etest,band='NR',label='GGA3',F=0.000001,V=p[3]*4.0,aH=p[2],alpha=(1/18.0),A=p[0],B=p[1])
+      end = time.time()
+      print('Normalization and Integration: {:1.5f} sec.'.format(end-start))
+      sig_res_func = np.sqrt(series_NRQ_var(Etest,V=p[3]*4.0,F=0,aH=p[2],A=p[0],B=p[1],alpha=(1/18.0))) + sig_corr(Etest)
+
+      output[i] = sig_res-sig_res_func
+      frac[i] = (sig_res-sig_res_func)/sig_res
+
+
+    #write output file
+    path='{}/{:3.1f}'.format('NR',Etest)
+    
+    f = h5py.File(outfile,'a')
+    
+    diffoutput = path+'output' in f
+    difffrac = path+'frac' in f
+    diffpars = path+'pars' in f
+    
+    
+    if diffoutput:
+      del f[path+'output']
+    if difffrac:
+      del f[path+'frac']
+    if diffpars:
+      del f[path+'pars']
+    
+    
+    
+    dset = f.create_dataset(path+'output',np.shape(output),dtype=np.dtype('float64').type, \
+    compression="gzip",compression_opts=9)
+    dset[...] = output 
+
+    dset = f.create_dataset(path+'frac',np.shape(frac),dtype=np.dtype('float64').type, \
+    compression="gzip",compression_opts=9)
+    dset[...] = frac 
+    
+    dset = f.create_dataset(path+'pars',np.shape(pars),dtype=np.dtype('float64').type, \
+    compression="gzip",compression_opts=9)
+    dset[...] = pars 
+    
+    
+    f.close() 
+
+    return output,frac
