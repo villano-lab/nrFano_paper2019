@@ -5,11 +5,12 @@ from scipy.integrate import quad
 import resfuncRead as rfr
 import scipy.optimize as so
 import EdwRes as er
+import pandas as pd
+import scipy.interpolate as inter
 
 #all needed for diff mapping and nothing else
 import fano_calc as fc
 import h5py
-import scipy.interpolate as inter
 import time
 
 
@@ -622,6 +623,49 @@ def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,la
   #return TEdw+T2+T3 
   return TEdw+(T2+T3+T4+T5+T6)
 
+#let's write a corrected version of this function
+def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
+
+    #####First Correction
+    #get sigQ for for nominal parameters
+    Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+
+    #spline those diffs
+    sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
+    sig_corr = sig0(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
+
+    #set up return value so far
+    sigr = series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B) + sig_corr 
+
+    ######Next Correction (can only do it if Er is near the Edw data values)
+    resNR_data = pd.read_csv("data/edelweiss_NRwidth_GGA3_data.txt", skiprows=1, \
+                  names=['E_recoil', 'sig_NR', 'E_recoil_err', 'sig_NR_err'], \
+                  delim_whitespace=True)
+
+    NR_data = {'Erecoil': resNR_data["E_recoil"][2::], 'sigma': resNR_data["sig_NR"][2::], 'sigma_err': resNR_data["sig_NR_err"][2::]}
+
+    E = np.sort(NR_data['Erecoil'])
+
+    Enear = find_nearest(E,Er)
+
+    if (np.abs(Enear-Er)/Er) < 0.01:
+      print('highly accurate')
+      path='{}/{:3.1f}/'.format('NR',Enear)
+      f = h5py.File(corr1file,'r')
+      output = np.asarray(f[path+'output'])
+      pars = np.asarray(f[path+'pars'])
+      corr_func = inter.NearestNDInterpolator(pars,output)
+      sigr += corr_func([A,B,aH,(V/4.0)])
+      f.close()
+
+    return sigr**2
+
+
+#helper function 
+def find_nearest(array, value):
+    array = np.asarray(array)
+    idx = (np.abs(array - value)).argmin()
+    return array[idx]
 
 # The function below will compute the HPD interval. 
 # The idea is that we rank-order the MCMC trace. 
@@ -709,20 +753,9 @@ def diffmap(pars,Etest=25.0,outfile='data/diffmap.h5',diff0file='data/sig_diffs.
     #get sigQ for for nominal parameters
     Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
 
-    #get first order correction
-    f = h5py.File(diff0file,'r')
-
-    #save the results for the Edw fit
-    path='{}/'.format('NR')
-
-    dsig = np.asarray(f[path+'dsig'])
-    Er = np.asarray(f[path+'Er'])
-
-    f.close()
-
     #spline those diffs
     sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
-    sig_corr = inter.InterpolatedUnivariateSpline(Er, sig0(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0))), k=3)
+    sig_corr = inter.InterpolatedUnivariateSpline(Enr, sig0(Enr) - np.sqrt(series_NRQ_var(Enr,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0))), k=3)
     sig_corr_v = np.vectorize(sig_corr)
     print(sig_corr_v(150))
 
@@ -739,7 +772,7 @@ def diffmap(pars,Etest=25.0,outfile='data/diffmap.h5',diff0file='data/sig_diffs.
 
 
     #write output file
-    path='{}/{:3.1f}'.format('NR',Etest)
+    path='{}/{:3.1f}/'.format('NR',Etest)
     
     f = h5py.File(outfile,'a')
     
