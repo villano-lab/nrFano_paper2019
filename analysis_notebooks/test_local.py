@@ -20,6 +20,7 @@ def _exec_papermill(input_nb, args):
 def test():
     print('Testing Jupyter notebooks...')
     _exec_notebook('nrFano_paper.ipynb')
+    _exec_notebook('5D_sigQ_parameterization.ipynb')
     _exec_notebook('silicon_Fano.ipynb')
     _exec_notebook('QEr_2D_joint.ipynb')
     _exec_notebook('ERNR_bands.ipynb')
