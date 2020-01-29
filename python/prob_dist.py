@@ -626,6 +626,13 @@ def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,la
 #let's write a corrected version of this function
 def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
 
+    #set up return value so far
+    sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) \
+      + series_NRQ_sig_c1(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
+      + series_NRQ_sig_c2(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label,corr1file=corr1file) 
+
+    return sigr**2
+
     #####First Correction
     #get sigQ for for nominal parameters
     Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
@@ -670,7 +677,22 @@ def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.
 
     return sigr**2
 
-def series_NRQ_var_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
+def series_NRQ_sig_c1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+
+    #####First Correction
+    #get sigQ for for nominal parameters
+    Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+
+    #spline those diffs
+    sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
+    sig_corr = sig0(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
+
+    #set up return value so far
+    sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 
+
+    return sig_corr
+
+def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
 
     ######Next Correction (can only do it if Er is near the Edw data values)
     f = h5py.File(corr1file,'r')
