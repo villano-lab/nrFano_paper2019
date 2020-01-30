@@ -640,18 +640,6 @@ def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.
 
     return sigr**2
 
-#####Global block for speed purposes
-#get sigQ for for nominal parameters
-#Enr_glob,signr_glob = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
-
-#spline those diffs
-#sig0_glob = inter.InterpolatedUnivariateSpline(Enr_glob, signr_glob , k=3)
-
-#get the resolutions                                                                              
-#sigHv_glob,sigIv_glob,sigQerv_glob,sigH_NRv_glob,sigI_NRv_glob,sigQnrv_glob = \
-#     er.getEdw_det_res('GGA3',4.0,'data/edw_res_data.txt',aH=0.0381,C=None) 
-##############
-
 def series_NRQ_sig_c1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
 
     #####First Correction
