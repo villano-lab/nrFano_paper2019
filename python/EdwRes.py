@@ -2,6 +2,7 @@ import numpy as np
 import re
 from functools import partial
 
+
 # note that np.log() is the natural log (base e)
 FWHM_to_SIG = 1 / (2*np.sqrt(2*np.log(2)))
 
@@ -240,3 +241,10 @@ def getEdw_det_res(label='GGA3',V=4.0,infile='data/edw_res_data.txt',aH=None,C=N
     sigQerv = np.vectorize(sigQer)
     sigQnrv = np.vectorize(sigQnr)
     return (sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv)
+
+
+#####Global block for speed purposes
+#get the resolutions                                                                              
+sigHv_glob,sigIv_glob,sigQerv_glob,sigH_NRv_glob,sigI_NRv_glob,sigQnrv_glob = \
+     getEdw_det_res('GGA3',4.0,'data/edw_res_data.txt',aH=0.0381,C=None) 
+#####

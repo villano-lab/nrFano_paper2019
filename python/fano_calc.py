@@ -788,3 +788,12 @@ def storeFMCMC(n,infile='data/mcmc_fits.h5',filename='test.h5',det='GGA3',Cms=0.
   #def RWCalcFMCMC(filename='test.h5',det='GGA3',V=4.0,alpha=(1/18.0),aH=0.0381,ErFv=None,Fv=None,Fupv=None,Fdnv=None,erase=False):
   (ErF_new,F_new,Fup_new,Fdn_new) = RWCalcFMCMC(filename,det,V,alpha,aH,ErFv=E_needed,Fv=Fcalc,Fupv=Fupcalc,Fdnv=Fdncalc,erase=erase)
   return (ErF_new,F_new,Fup_new,Fdn_new)
+
+
+#####Global block for speed purposes
+#get sigQ for for nominal parameters
+Enr_glob,signr_glob = RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+
+#spline those diffs
+sig0_glob = inter.InterpolatedUnivariateSpline(Enr_glob, signr_glob , k=3)
+#####
