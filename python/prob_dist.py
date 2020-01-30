@@ -624,6 +624,13 @@ def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,la
   return TEdw+(T2+T3+T4+T5+T6)
 
 #let's write a corrected version of this function
+def series_NRQ_var_corr1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
+
+    #set up return value so far
+    sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) \
+      + series_NRQ_sig_c1(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
+
+    return sigr**2
 def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
 
     #set up return value so far
@@ -633,59 +640,28 @@ def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.
 
     return sigr**2
 
-    #####First Correction
-    #get sigQ for for nominal parameters
-    Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+#####Global block for speed purposes
+#get sigQ for for nominal parameters
+Enr_glob,signr_glob = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
 
-    #spline those diffs
-    sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
-    sig_corr = sig0(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
+#spline those diffs
+sig0_glob = inter.InterpolatedUnivariateSpline(Enr_glob, signr_glob , k=3)
 
-    #set up return value so far
-    sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 
-
-    ######Next Correction (can only do it if Er is near the Edw data values)
-    f = h5py.File(corr1file,'r')
-    E = np.zeros((0,))
-    for i in f['NR/']:
-      a = np.asarray([float(i)])
-      E = np.concatenate((E,a))
-
-    E = np.sort(E)
-    #print(E)
-    #f.close()
-    #resNR_data = pd.read_csv("data/edelweiss_NRwidth_GGA3_data.txt", skiprows=1, \
-    #              names=['E_recoil', 'sig_NR', 'E_recoil_err', 'sig_NR_err'], \
-    #              delim_whitespace=True)
-
-    #NR_data = {'Erecoil': resNR_data["E_recoil"][2::], 'sigma': resNR_data["sig_NR"][2::], 'sigma_err': resNR_data["sig_NR_err"][2::]}
-
-    #E = np.sort(NR_data['Erecoil'])
-
-    Enear = find_nearest(E,Er)
-
-    if (np.abs(Enear-Er)/Er) < 0.01:
-      #print('highly accurate')
-      path='{}/{:3.1f}/'.format('NR',Enear)
-      #f = h5py.File(corr1file,'r')
-      output = np.asarray(f[path+'output'])
-      pars = np.asarray(f[path+'pars'])
-      corr_func = inter.NearestNDInterpolator(pars,output)
-      sigr += corr_func([A,B,aH,(V/4.0)])
-
-    f.close()
-
-    return sigr**2
+#get the resolutions                                                                              
+sigHv_glob,sigIv_glob,sigQerv_glob,sigH_NRv_glob,sigI_NRv_glob,sigQnrv_glob = \
+     er.getEdw_det_res('GGA3',4.0,'data/edw_res_data.txt',aH=0.0381,C=None) 
+##############
 
 def series_NRQ_sig_c1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
 
     #####First Correction
     #get sigQ for for nominal parameters
-    Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+    #Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
 
     #spline those diffs
-    sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
-    sig_corr = sig0(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
+    #sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
+    #sig_corr = sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
+    sig_corr = sig0_glob(Er) - sigQnrv_glob(Er) 
 
     #set up return value so far
     sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 
