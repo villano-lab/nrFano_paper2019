@@ -9,6 +9,9 @@ edelweiss_res.ipynb
 ## Extraction of error on Edelweiss "C" <br/>
 edelweiss_C.ipynb
 
+## Extraction of Edelweiss fit parameters and their errors <br/>
+edelweiss_C_systematicErrors_allParameters.ipynb
+
 ## Calculation of the 2-dimensional Y, Er joint distribution <br/>
 QEr_2D_joint.ipynb <br/>
 <!---addendum -- check normalization against Arvind's function <br/>
