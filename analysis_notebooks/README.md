@@ -9,8 +9,11 @@ edelweiss_res.ipynb
 ## Extraction of error on Edelweiss "C" <br/>
 edelweiss_C.ipynb
 
-## Extraction of Edelweiss fit parameters and their errors <br/>
+## Extraction of Edelweiss fit parameters and their errors using Edelweiss functions<br/>
 edelweiss_C_systematicErrors_allParameters.ipynb
+
+## Extraction of Edelweiss fit paramters using first-order corrected NR and ER functions <br/>
+edelweiss_fit_allParameters_seriesCorr.ipynb
 
 ## Calculation of the 2-dimensional Y, Er joint distribution <br/>
 QEr_2D_joint.ipynb <br/>
