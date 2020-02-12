@@ -1,0 +1,8 @@
+#label FWHM0-center  FWHM0-guard FWHM0-heat  FWHM122-ion FWHM122-heat  trigthresh-center trigthresh-guard
+GeAl6   2.0 1.4 2.2 2.8 3.5 6.0 4.0
+GeAl9   1.2 1.4 0.5 2.6 3.3 4.3 4.9
+GeAl19  1.1 1.3 0.4 3.0 3.5 3.3 4.3
+GGA1    1.3 1.3 1.3 2.8 3.5 3.5 3.5
+GGA3    1.3 1.5 0.4 3.1 2.7 2.9 3.9
+GSA1    1.2 1.4 0.6 3.1 2.8 3.5 3.4
+GSA3    1.1 1.3 1.4 3.3 3.3 3.0 3.4
