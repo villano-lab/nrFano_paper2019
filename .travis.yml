@@ -26,6 +26,9 @@ install:
   - conda env create -n test-environment python=$TRAVIS_PYTHON_VERSION -f nr_fano_env.yml 
   - source activate test-environment
 
+  # Useful for debugging version of emcee 
+  - conda list |grep emcee 
+
 before_script: cd analysis_notebooks
 
 script:
