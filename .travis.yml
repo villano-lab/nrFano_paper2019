@@ -27,6 +27,8 @@ install:
   - source activate test-environment
 
   # Useful for debugging version of emcee 
+  - echo 'Python Version:'
+  - echo $TRAVIS_PYTHON_VERSION
   - conda list |grep emcee 
 
 before_script: cd analysis_notebooks
