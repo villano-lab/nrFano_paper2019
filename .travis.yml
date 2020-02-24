@@ -23,12 +23,14 @@ install:
   # Useful for debugging any issues with conda
   - conda info -a
 
+  - echo 'Python Version:'
+  - echo $TRAVIS_PYTHON_VERSION
   - conda env create -n test-environment python=$TRAVIS_PYTHON_VERSION -f nr_fano_env.yml 
   - source activate test-environment
 
   # Useful for debugging version of emcee 
   - echo 'Conda searching emcee:'
-  - conda search emcee
+    #- conda search emcee
   - echo 'Python Version:'
   - echo $TRAVIS_PYTHON_VERSION
   - conda list |grep emcee 
