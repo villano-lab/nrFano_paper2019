@@ -27,6 +27,8 @@ install:
   - source activate test-environment
 
   # Useful for debugging version of emcee 
+  - echo 'Conda searching emcee:'
+  - conda search emcee
   - echo 'Python Version:'
   - echo $TRAVIS_PYTHON_VERSION
   - conda list |grep emcee 
