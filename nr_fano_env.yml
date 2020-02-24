@@ -4,7 +4,7 @@ dependencies:
   - anaconda
   - numpy
   - scipy
-  - emcee
+  - conda-forge::emcee
   - pandas
   - astropy::gammapy
   - astropy::corner
