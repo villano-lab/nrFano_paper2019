@@ -29,5 +29,10 @@ ytick.labelsize : 22
 #errorbar.capsize : 3
 
 #axis stuff
-axes.labelsize : 22
+axes.labelsize : 32
 
+#legend
+legend.fontsize : 22
+
+#fonts
+font.family : Arial
