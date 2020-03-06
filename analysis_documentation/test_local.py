@@ -20,5 +20,6 @@ def _exec_papermill(input_nb, args):
 def test():
     print('Testing Jupyter notebooks...')
     _exec_notebook('nrFano_documentation.ipynb')
+    _exec_notebook('lindhard_SiGe.ipynb')
     #_exec_papermill('edelweiss_res.ipynb', None)
     #_exec_papermill('edelweiss_C_systematicErrors_allParameters.ipynb', {'Test': True})

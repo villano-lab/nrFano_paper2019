@@ -4,6 +4,7 @@
 nrFano_documentation.ipynb
 
 ## Lindhard calculation of Fano factors <br/>
+lindhard_SiGe.ipynb
 
 ## Comparison of Dougherty silicon yield variance measurement to Lindhard <br/>
 silicon_Fano.ipynb
