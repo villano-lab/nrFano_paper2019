@@ -1,4 +1,4 @@
-name: nr_fano
+name: fano_pub
 dependencies:
   - python>=3.6
   - anaconda
