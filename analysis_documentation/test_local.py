@@ -22,5 +22,6 @@ def test():
     _exec_notebook('nrFano_documentation.ipynb')
     _exec_notebook('lindhard_SiGe.ipynb')
     _exec_notebook('silicon_Fano.ipynb')
+    _exec_notebook('edelweiss_2004_resolutions.ipynb')
     #_exec_papermill('edelweiss_res.ipynb', None)
     #_exec_papermill('edelweiss_C_systematicErrors_allParameters.ipynb', {'Test': True})
