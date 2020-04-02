@@ -34,4 +34,3 @@ def test():
     _exec_notebook('bin_centering_correction.ipynb')
     _exec_papermill('edelweiss_res.ipynb', None)
     #_exec_papermill('edelweiss_C_systematicErrors_allParameters.ipynb', {'Test': True})
-    _exec_notebook('edelweiss_yield_fromData_GGA1.ipynb')
