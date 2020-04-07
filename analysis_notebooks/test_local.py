@@ -31,6 +31,6 @@ def test():
     #_exec_notebook('ms_correction.ipynb')
     #_exec_notebook('yield_width_compare.ipynb')
     #_exec_notebook('fitting_errors.ipynb')
-    #_exec_notebook('bin_centering_correction.ipynb')
-    _exec_papermill('edelweiss_res.ipynb', None)
+    _exec_notebook('bin_centering_correction.ipynb')
+    #_exec_papermill('edelweiss_res.ipynb', None) # causes problem
     #_exec_papermill('edelweiss_C_systematicErrors_allParameters.ipynb', {'Test': True})
