@@ -10,10 +10,22 @@ edelweiss_res.ipynb
 edelweiss_C.ipynb
 
 ## Extraction of Edelweiss fit parameters and their errors using Edelweiss functions<br/>
+### Allow A, B (the yield function), aH, V (the resolution fit and voltage), and m, C (the additional width) to vary
 edelweiss_C_systematicErrors_allParameters.ipynb
+data/systematic_error_fits.h5
+
+### Allow only m and C (the additional width) to vary
+edelweiss_C_statisticalErrors.ipynb
+data/systematic_error_fits.h5
 
 ## Extraction of Edelweiss fit paramters using first-order corrected NR and ER functions <br/>
+### Allow A, B (the yield function), aH, V (the resolution fit and voltage), and m, C (the additional width) to vary
 edelweiss_fit_allParameters_seriesCorr.ipynb
+data/systematic_error_fits_corr.h5
+
+### Allow only m and C (the additional width) to vary
+edelweiss_C_statisticalErrors_corr.ipynb
+data/statistical_error_fits_corr.h5
 
 ## Calculation of the 2-dimensional Y, Er joint distribution <br/>
 QEr_2D_joint.ipynb <br/>
