@@ -11,12 +11,14 @@ edelweiss_C.ipynb
 
 ## Extraction of Edelweiss fit parameters and their errors using Edelweiss functions<br/>
 ### Allow A, B (the yield function), aH, V (the resolution fit and voltage), and m, C (the additional width) to vary
-edelweiss_C_systematicErrors_allParameters.ipynb
-data/systematic_error_fits.h5
+notebook: edelweiss_C_systematicErrors_allParameters.ipynb
+MCMC sample chain: data/edelweiss_C_systematicErrors_sampler_nll_allpars_gausPrior.h5
+Error in the fit: data/systematic_error_fits.h5
 
 ### Allow only m and C (the additional width) to vary
-edelweiss_C_statisticalErrors.ipynb
-data/systematic_error_fits.h5
+notebook: edelweiss_C_statisticalErrors.ipynb
+MCMC sample chain: data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5
+Error in the fit: data/systematic_error_fits.h5
 
 ## Extraction of Edelweiss fit paramters using first-order corrected NR and ER functions <br/>
 ### Allow A, B (the yield function), aH, V (the resolution fit and voltage), and m, C (the additional width) to vary
