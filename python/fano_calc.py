@@ -792,6 +792,8 @@ def storeFMCMC(n,infile='data/mcmc_fits.h5',filename='test.h5',det='GGA3',Cms=0.
 
 #####Global block for speed purposes
 #get sigQ for for nominal parameters
+# nominal parameters are the Edelweiss-reported parameters, aH = 0.0381, V = 4, 
+# yield paramters are A = 0.16, B = 0.18
 Enr_glob,signr_glob = RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
 
 #spline those diffs
