@@ -152,7 +152,14 @@ def getEdw_res_pars(infile='data/edw_res_data.txt'):
 
     #open the file return a dictionary with label,FWHM 0keV ion, FWHM 0 keV guard,
     #FWHM 0 keV heat, FWHM 122 keV ion, FWHM 122 keV heat as elements
-    f = open(infile)
+    try:
+        f = open(infile)
+    except:
+        import os
+        filedir = os.path.dirname(os.path.abspath(__file__))
+        infile = os.path.join(filedir, '../analysis_notebooks/data/edw_res_data.txt')
+
+        f = open(infile)
 
     #make a list for vector identifier 
     #first two are x-y of histogram-type step function

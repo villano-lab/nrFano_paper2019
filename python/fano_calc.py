@@ -794,7 +794,14 @@ def storeFMCMC(n,infile='data/mcmc_fits.h5',filename='test.h5',det='GGA3',Cms=0.
 #get sigQ for for nominal parameters
 # nominal parameters are the Edelweiss-reported parameters, aH = 0.0381, V = 4, 
 # yield paramters are A = 0.16, B = 0.18
-Enr_glob,signr_glob = RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+# path checking is for running on a cluster
+if os.path.lexists('data/res_calc.h5'):
+  datafile = 'data/res_calc.h5'
+else:
+  filedir = os.path.dirname(os.path.abspath(__file__))
+  datafile = os.path.join(filedir, '../analysis_notebooks/data/res_calc.h5')
+
+Enr_glob,signr_glob = RWCalc(filename=datafile,alpha=1/18.0,aH=0.0381,band='NR')
 
 #spline those diffs
 sig0_glob = inter.InterpolatedUnivariateSpline(Enr_glob, signr_glob , k=3)
