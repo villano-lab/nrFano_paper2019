@@ -55,7 +55,7 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
 
     aH_col, C_col, m_col, scale_col, A_col, B_col = [], [], [], [], [], []
     sig_yield_col, sig_yield_estimate_col = [], []
-    energy_col = np.full((numSamples, 1), Erecoil)
+    energy_col = np.repeat(Erecoil, numSamples) #np.full((numSamples, 1), Erecoil)
 
     for aH, C, m, scale, A, B in samples[np.random.randint(len(samples), size=numSamples)]:
         V = scale*4.0 #,'eps_eV' : 3.0, 'a': A, 'b': B
@@ -95,7 +95,7 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
     now = datetime.now()
     time = now.strftime('%Y%h%d_%H%M')
     #print (time)
-    filename = os.path.join(datadir, 'yield_accuracy_%s.h5' % time)
+    filename = os.path.join(datadir, 'yield_accuracy_Erecoil_%.2f_keV_%s.h5' % (Erecoil, time))
     #print(filename)
 
     # make an astropy table
