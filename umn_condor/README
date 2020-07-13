@@ -1,0 +1,9 @@
+#####Instructions#####
+
+On the UMN "py373_2020" conda environment (ask A. Villano if need assistance) run these jobs for
+100-sample batches in order to calculate the true Edelweiss yield variance (a lengthy calculation)
+for a wide range of nuisance parameters. 
+
+Run like:
+
+$condor_submit condor-checkDifference-E0 
