@@ -93,7 +93,7 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
     # Store the information
     #############################
     now = datetime.now()
-    time = now.strftime('%Y%h%d_%H%M')
+    time = now.strftime('%Y%h%d_%H%M%S%f')
     #print (time)
     filename = os.path.join(datadir, 'yield_accuracy_Erecoil_%.2f_keV_%s.h5' % (Erecoil, time))
     #print(filename)
@@ -139,8 +139,7 @@ def main(args):
 
 """
 Example use:
-(nr_fano) aroberts@DESKTOP-F1SLP9K python$ python checkDifference_yieldVariance.py --energyIndex 0 --numSamples 5 --repoPath "/mnt/c/Users/canto/Repositories/nrFano_paper2019" --dataPath "../
-analysis_notebooks/data"
+(nr_fano) aroberts@DESKTOP-F1SLP9K python$ python checkDifference_yieldVariance.py --energyIndex 0 --numSamples 5 --repoPath "/mnt/c/Users/canto/Repositories/nrFano_paper2019" --dataPath "../analysis_notebooks/data"
 """
 if __name__ == "__main__":
     # execute only if run as a script
