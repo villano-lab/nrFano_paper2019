@@ -38,13 +38,17 @@ def getPosteriorSamples(filename):
 
     return ndim, nwalkers, N, samples
 
-def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data'):
+"""
+returns the filename of an hdf5 file
+the hdf5 file contains:
+"""
+def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0):
     # get the samples
     # for the most accurate fit, 'data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5'
     ndim, nwalkers, nsteps, samples = getPosteriorSamples(posteriorFile)
     
     # reshape the samples
-    samples = samples[:, 300:, :].reshape((-1, ndim))
+    samples = samples[:, cutoffIndex:, :].reshape((-1, ndim))
     #print(len(samples))
 
     # not wise to ask for more samples than there were steps in the origianl
@@ -52,12 +56,23 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
     if numSamples > nsteps:
         numSamples = nsteps
         print ("You are requesting more samples than were in the original sample chain. \n Reducing the number of samples to ", numSamples)
+    elif startIndex is not None:
+        if numSamples + startIndex > nsteps:
+            numSamples = nsteps - startIndex
+            print ("You are requesting more samples than were in the original sample chain. \n Reducing the number of samples to ", numSamples)
 
     aH_col, C_col, m_col, scale_col, A_col, B_col = [], [], [], [], [], []
     sig_yield_col, sig_yield_estimate_col = [], []
     energy_col = np.repeat(Erecoil, numSamples) #np.full((numSamples, 1), Erecoil)
 
-    for aH, C, m, scale, A, B in samples[np.random.randint(len(samples), size=numSamples)]:
+    # create the mask that will select the samples
+    if startIndex is None:
+        mask = np.random.randint(len(samples), size=numSamples)
+    else:
+        mask = np.arange(numSamples) + startIndex
+
+    # now use the mask to select the samples and iterate over those
+    for aH, C, m, scale, A, B in samples[mask]:
         V = scale*4.0 #,'eps_eV' : 3.0, 'a': A, 'b': B
 
         # calculate the yield standard deviation used for fitting in edelweiss_fit_allParameters_
@@ -135,11 +150,11 @@ def main(args):
 
     # generate and store the data
     MCMC_data_filename = os.path.join(args.repoPath, 'analysis_notebooks/data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5')
-    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath)
+    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath, args.startIndex)
 
 """
 Example use:
-(nr_fano) aroberts@DESKTOP-F1SLP9K python$ python checkDifference_yieldVariance.py --energyIndex 0 --numSamples 5 --repoPath "/mnt/c/Users/canto/Repositories/nrFano_paper2019" --dataPath "../analysis_notebooks/data"
+(nr_fano) aroberts@DESKTOP-F1SLP9K python$ python checkDifference_yieldVariance.py --energyIndex 0 --numSamples 5 --startIndex 3 --repoPath "/mnt/c/Users/canto/Repositories/nrFano_paper2019" --dataPath "../analysis_notebooks/data"
 """
 if __name__ == "__main__":
     # execute only if run as a script
@@ -154,6 +169,8 @@ if __name__ == "__main__":
                        help='path to the repository')
     parser.add_argument('--dataPath', 
                        help='path to the repository')
+    parser.add_argument('--startIndex', type=int,
+                       help='will sample from startIndex to startIndex + numSamples')
 
     args = parser.parse_args()
 
