@@ -22,5 +22,5 @@ Output		= $(OutputDir)/checkDifference_condor.phys.out.$(Cluster)-$(Process).txt
 #should_transfer_files = YES
 #when_to_transfer_output = ON_EXIT
 
-Arguments = "checkDifference_yieldVariance.py --energyIndex 1 --numSamples 100 --repoPath /home/villaa/analysis/misc/nrFano_paper2019 --dataPath /home/villaa/analysis/misc/nrFano_paper2019/analysis_notebooks/data/"
+Arguments = "checkDifference_yieldVariance.py --energyIndex 1 --numSamples 100 --repoPath /home/villaa/analysis/misc/nrFano_paper2019 --dataPath /home/villaa/analysis/misc/nrFano_paper2019/analysis_notebooks/data/ --startIndex STARTIDX"
 Queue
