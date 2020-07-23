@@ -6,8 +6,16 @@ for a wide range of nuisance parameters.
 
 Run like:
 
-$condor_submit condor-checkDifference-E0 
+$condor_submit condor-checkDifference-E0-random 
 
 Or this one to submit 100 jobs:
 
-seq 100 |awk '{system("condor_submit condor-checkDifference-E0 ");}'
+seq 100 |awk '{system("condor_submit condor-checkDifference-E0-random ");}'
+
+The above will give you random selections of points from the input file. If you
+don't want random selections you have to use the script "do5k.sh" or a sequence
+of shell commands similar to the ones contained in there. 
+
+$./do5k.sh ${EBIN}
+
+The ${EBIN} input specifies the energy bin that we are using: 0,1,2,3. 
