@@ -3,3 +3,7 @@ __pycache__
 ~*
 venv/
 .ipynb_checkpoints/
+
+# this file has data that should not be accidentally changed
+res_calc.h5
+*.h5

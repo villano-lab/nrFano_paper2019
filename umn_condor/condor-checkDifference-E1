@@ -1,0 +1,26 @@
+# This script uses BatRoot directly. This is convenient for one series. The paths are set for UMN data.
+#+CondorGroup = "phys"
++CondorGroup = "cdms"
++HappyToBeEvicted = TRUE
+Universe        = vanilla
+Executable      = /home/phys/villaa/python/anaconda3_2019/envs/py373_2020/bin/python 
+GetEnv		= true
+
+remote_initialdir = /home/phys/villaa/analysis/misc/nrFano_paper2019/python 
+
+Notification = error
+Notify_user = $ENV(USER)@physics.umn.edu
+
+Requirements = (Machine != "cdms2.spa.umn.edu") && (Arch=="X86_64")
+#request_memory = ImageSize
+
+OutputDir	= /home/phys/villaa/analysis/misc/nrFano_paper2019/umn_condor/logs 
+Error       = $(OutputDir)/checkDifference_condor.phys.err.$(Cluster)-$(Process).txt
+Log         = $(OutputDir)/checkDifference_condor.phys.log.$(Cluster)-$(Process).txt
+Output		= $(OutputDir)/checkDifference_condor.phys.out.$(Cluster)-$(Process).txt
+
+#should_transfer_files = YES
+#when_to_transfer_output = ON_EXIT
+
+Arguments = "checkDifference_yieldVariance.py --energyIndex 1 --numSamples 100 --repoPath /home/villaa/analysis/misc/nrFano_paper2019 --dataPath /home/villaa/analysis/misc/nrFano_paper2019/analysis_notebooks/data/ --startIndex STARTIDX"
+Queue
