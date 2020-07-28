@@ -338,7 +338,7 @@ def sigrootEdw(F,Er,V,eps,alpha=(1/100),Qbar=lambda x: 0.16*x**0.18,aH=0.0381):
     return rootF 
 
 #set the Edelweiss sigma (second central moment) definition to default to NR band
-def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100), A=0.16, B=0.18):
+def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100), A=0.16, B=0.18, lowlim=-1, verbose=False):
 
     #get the resolutions
     sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
@@ -360,15 +360,17 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
       gF = expband_2D(fF,alpha,1.5)
       mean = A*Er**B
 
-    norm = quad(gF,-1,4,args=(Er,))[0]
+    norm = quad(gF,lowlim,4,args=(Er,))[0]
     #norm10 = 10.32813952
 
     #norm = norm10*(np.exp(-alpha*Er)/np.exp(-alpha*10))
-    #print(norm)
+    if(verbose):
+      print('Normalization constant: {}'.format(norm))
 
 
     Qdist = lambda Q: (1/norm)*gF(Q,Er)
-    #print(Qdist(1))
+    if(verbose):
+      print('f(Q=1): {}'.format(Qdist(1)))
 
     #get the mean 
     #NOTE: actually I found the calculation of variance from the definition (NOT 68% containment)
@@ -378,8 +380,9 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
     #I guess this is because <x^2> and <x>^2 are both "large" and you have to subtract them to get
     #the answer--this amplifies numerical uncertainties.
     meanfun = lambda Q: Q*Qdist(Q)
-    mean = quad(meanfun,-1,4)[0]
-    #print(mean)
+    mean = quad(meanfun,lowlim,4)[0]
+    if(verbose):
+      print('Mean: {}'.format(mean))
 
     #intyF = lambda a: quad(Qdist,mean-a,mean+a,limit=100)[0]
 
@@ -389,7 +392,9 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
 
     #by integration
     sigfun = lambda Q: Q**2*Qdist(Q)
-    q2 = quad(sigfun,-1,4)[0]
+    q2 = quad(sigfun,lowlim,4)[0]
+    if(verbose):
+      print('<q^2>: {}'.format(q2))
 
     #print(sigQerv(Er))
     #return norm,rootF,(np.sqrt(q2-mean**2)) 
