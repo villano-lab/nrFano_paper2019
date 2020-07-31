@@ -42,14 +42,16 @@ def getPosteriorSamples(filename):
 returns the filename of an hdf5 file
 the hdf5 file contains:
 """
-def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0):
+def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0, lowerLimit=-1):
     # get the samples
     # for the most accurate fit, 'data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5'
     ndim, nwalkers, nsteps, samples = getPosteriorSamples(posteriorFile)
-    
+    print (ndim, nwalkers, nsteps)
+    print(np.size(samples))
+
     # reshape the samples
     samples = samples[:, cutoffIndex:, :].reshape((-1, ndim))
-    #print(len(samples))
+    print(np.size(samples))
 
     # not wise to ask for more samples than there were steps in the origianl
     # sample chain
@@ -89,7 +91,7 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
         for Er_val in Er:
             sig_real.append(sigmomEdw(Er_val, band='NR', F=0.000001, V=scale*4.0, aH=aH, alpha=(1/100), A=A, B=B))
         """
-        true_NR_sig = sigmomEdw(Erecoil,band='NR',label='GGA3',F=0.000001,V=V,aH=aH,alpha=(1/18.0), A=A, B=B)
+        true_NR_sig = sigmomEdw(Erecoil,band='NR',label='GGA3',F=0.000001,V=V,aH=aH,alpha=(1/18.0), A=A, B=B, lowlim=lowerLimit)
 
         # store the parameter data
         #print (aH, C, m, scale, A, B)
@@ -149,8 +151,9 @@ def main(args):
     Erecoil = Er[args.energyIndex]
 
     # generate and store the data
-    MCMC_data_filename = os.path.join(args.repoPath, 'analysis_notebooks/data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5')
-    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath, args.startIndex)
+    # def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0, lowerLimit=-1):
+    MCMC_data_filename = os.path.join(args.repoPath, 'analysis_notebooks/data/', args.fileName)
+    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath, args.startIndex, args.cutoffIndex, args.lowerLimit)
 
 """
 Example use:
@@ -167,10 +170,16 @@ if __name__ == "__main__":
                        help='number of samples to draw from the posterior distribution')
     parser.add_argument('--repoPath', 
                        help='path to the repository')
+    parser.add_argument('--fileName', default='edelweiss_NRwidth_GGA3_data.txt',
+                       help='data file name')                      
     parser.add_argument('--dataPath', 
                        help='path to the repository')
+    parser.add_argument('--cutoffIndex', type=int, default=0,
+                       help='drop this number of samples from the sampler')
     parser.add_argument('--startIndex', type=int,
                        help='will sample from startIndex to startIndex + numSamples')
+    parser.add_argument('--lowerLimit', type=float, default=-1,
+                       help='set the integration lower limit, defaults to -1')
 
     args = parser.parse_args()
 
