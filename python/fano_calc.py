@@ -157,6 +157,9 @@ def RWCalc(filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/1000
   if (Erv is not None)&(sigv is not None):
     Er = np.append(Er,Erv)
     sig = np.append(sig,sigv)
+  else:
+    f.close()
+    return (Er,sig)
 
   if exEr&exsig:
     del f[path+'Er']
@@ -619,6 +622,9 @@ def RWCalcFMCMC(filename='test.h5',det='GGA3',V=4.0,alpha=(1/18.0),aH=0.0381,ErF
     F = np.append(F,Fv)
     Fup = np.append(Fup,Fupv)
     Fdn = np.append(Fdn,Fdnv)
+  else:
+    f.close()
+    return (ErF,F,Fup,Fdn)
 
   if exErF&exF&exFup&exFdn:
     del f[path+'ErF']
