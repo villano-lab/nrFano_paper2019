@@ -42,7 +42,7 @@ def getPosteriorSamples(filename):
 returns the filename of an hdf5 file
 the hdf5 file contains:
 """
-def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0):
+def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0, lowerLimit):
     # get the samples
     # for the most accurate fit, 'data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5'
     ndim, nwalkers, nsteps, samples = getPosteriorSamples(posteriorFile)
@@ -89,7 +89,7 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
         for Er_val in Er:
             sig_real.append(sigmomEdw(Er_val, band='NR', F=0.000001, V=scale*4.0, aH=aH, alpha=(1/100), A=A, B=B))
         """
-        true_NR_sig = sigmomEdw(Erecoil,band='NR',label='GGA3',F=0.000001,V=V,aH=aH,alpha=(1/18.0), A=A, B=B)
+        true_NR_sig = sigmomEdw(Erecoil,band='NR',label='GGA3',F=0.000001,V=V,aH=aH,alpha=(1/18.0), A=A, B=B, lowlim=lowerLimit)
 
         # store the parameter data
         #print (aH, C, m, scale, A, B)
@@ -150,7 +150,7 @@ def main(args):
 
     # generate and store the data
     MCMC_data_filename = os.path.join(args.repoPath, 'analysis_notebooks/data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5')
-    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath, args.startIndex)
+    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath, args.startIndex, args.lowerLimit)
 
 """
 Example use:
@@ -171,6 +171,8 @@ if __name__ == "__main__":
                        help='path to the repository')
     parser.add_argument('--startIndex', type=int,
                        help='will sample from startIndex to startIndex + numSamples')
+    parser.add_argument('--lowerLimit', type=float, default=-1,
+                       help='set the integration lower limit, defaults to -1')
 
     args = parser.parse_args()
 
