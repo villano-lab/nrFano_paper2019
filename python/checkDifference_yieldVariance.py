@@ -42,7 +42,7 @@ def getPosteriorSamples(filename):
 returns the filename of an hdf5 file
 the hdf5 file contains:
 """
-def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0, lowerLimit):
+def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0, lowerLimit=-1):
     # get the samples
     # for the most accurate fit, 'data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5'
     ndim, nwalkers, nsteps, samples = getPosteriorSamples(posteriorFile)
@@ -167,7 +167,7 @@ if __name__ == "__main__":
                        help='number of samples to draw from the posterior distribution')
     parser.add_argument('--repoPath', 
                        help='path to the repository')
-    parser.add_argument('--fileName', default='edelweiss_NRwidth_GGA3_data.txt'
+    parser.add_argument('--fileName', default='edelweiss_NRwidth_GGA3_data.txt',
                        help='data file name')                      
     parser.add_argument('--dataPath', 
                        help='path to the repository')
