@@ -136,7 +136,7 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
 def main(args):
     # We'll look at the Er values of the data points
     # import data from Edelweiss
-    resNR_filename = os.path.join(args.repoPath, 'analysis_notebooks/data/edelweiss_NRwidth_GGA3_data.txt')
+    resNR_filename = os.path.join(args.repoPath, 'analysis_notebooks/data/', args.fileName)
     resNR_data = pd.read_csv(resNR_filename, skiprows=1, \
                            names=['E_recoil', 'sig_NR', 'E_recoil_err', 'sig_NR_err'], \
                            delim_whitespace=True)
@@ -167,6 +167,8 @@ if __name__ == "__main__":
                        help='number of samples to draw from the posterior distribution')
     parser.add_argument('--repoPath', 
                        help='path to the repository')
+    parser.add_argument('--fileName', default='edelweiss_NRwidth_GGA3_data.txt'
+                       help='data file name')                      
     parser.add_argument('--dataPath', 
                        help='path to the repository')
     parser.add_argument('--startIndex', type=int,
