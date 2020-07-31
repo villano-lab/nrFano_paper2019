@@ -46,10 +46,12 @@ def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='.
     # get the samples
     # for the most accurate fit, 'data/edelweiss_corr_C_systematicErrors_sampler_nll_allpars_gausPrior.h5'
     ndim, nwalkers, nsteps, samples = getPosteriorSamples(posteriorFile)
-    
+    print (ndim, nwalkers, nsteps)
+    print(np.size(samples))
+
     # reshape the samples
     samples = samples[:, cutoffIndex:, :].reshape((-1, ndim))
-    #print(len(samples))
+    print(np.size(samples))
 
     # not wise to ask for more samples than there were steps in the origianl
     # sample chain
@@ -149,8 +151,9 @@ def main(args):
     Erecoil = Er[args.energyIndex]
 
     # generate and store the data
+    # def checkDifference_yieldVariance(Erecoil, numSamples, posteriorFile, datadir='./data', startIndex=None, cutoffIndex=0, lowerLimit=-1):
     MCMC_data_filename = os.path.join(args.repoPath, 'analysis_notebooks/data/', args.fileName)
-    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath, args.startIndex, args.lowerLimit)
+    checkDifference_yieldVariance(Erecoil, args.numSamples, MCMC_data_filename, args.dataPath, args.startIndex, args.cutoffIndex, args.lowerLimit)
 
 """
 Example use:
@@ -171,6 +174,8 @@ if __name__ == "__main__":
                        help='data file name')                      
     parser.add_argument('--dataPath', 
                        help='path to the repository')
+    parser.add_argument('--cutoffIndex', type=int, default=0,
+                       help='drop this number of samples from the sampler')
     parser.add_argument('--startIndex', type=int,
                        help='will sample from startIndex to startIndex + numSamples')
     parser.add_argument('--lowerLimit', type=float, default=-1,
