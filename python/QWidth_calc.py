@@ -32,11 +32,13 @@ if __name__ == "__main__":
         args = parser.parse_args()
 
         try:
-          fc.storeQWidth(200,filename='../paper_notebooks/data/res_calc.h5',maxEr=200)
-          fc.storeQWidth(200,filename='../paper_notebooks/data/res_calc.h5',band='NR',alpha=(1/18.0),maxEr=200)
-          fc.storeQWidth(200,filename='../paper_notebooks/data/res_calc.h5',band='NR',maxEr=200)
-          fc.storeQWidthVaryF(200,filename='../paper_notebooks/data/res_calc.h5',MSfile='../paper_notebooks/data/mcmc_fits.h5',Ffile='../paper_notebooks/data/mcmc_fano.h5',band='NR',alpha=(1/18.0),maxEr=200,erase=False)
-          fc.storeFMCMC(50,infile='../paper_notebooks/data/mcmc_fits.h5',filename='../paper_notebooks/data/mcmc_fano.h5',erase=True)
+          fc.storeQWidth(200,filename='../analysis_notebooks/data/res_calc.h5',band='NR',V=4.0,alpha=(1/18.0),aH=0.03801,A=0.1493,B=0.1782,scale=None,maxEr=200,erase=True)
+          fc.storeQWidth(200,filename='../analysis_notebooks/data/res_calc.h5',band='NR',V=4.0,alpha=(1/18.0),aH=0.03801,A=0.1493,B=0.1782,scale=0.9975,maxEr=200)
+          #fc.storeQWidth(200,filename='../paper_notebooks/data/res_calc.h5',maxEr=200)
+          #fc.storeQWidth(200,filename='../paper_notebooks/data/res_calc.h5',band='NR',alpha=(1/18.0),maxEr=200)
+          #fc.storeQWidth(200,filename='../paper_notebooks/data/res_calc.h5',band='NR',maxEr=200)
+          #fc.storeQWidthVaryF(200,filename='../paper_notebooks/data/res_calc.h5',MSfile='../paper_notebooks/data/mcmc_fits.h5',Ffile='../paper_notebooks/data/mcmc_fano.h5',band='NR',alpha=(1/18.0),maxEr=200,erase=False)
+          #fc.storeFMCMC(50,infile='../paper_notebooks/data/mcmc_fits.h5',filename='../paper_notebooks/data/mcmc_fano.h5',erase=True)
         except KeyboardInterrupt:
           print('Shutdown requested .... exiting')
         except Exception:

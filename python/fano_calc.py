@@ -120,7 +120,7 @@ def calcQWidth(n,F=10,V=4,eps=(3/1000),alpha=(1/100),Qbar=lambda x: 0.16*x**0.18
   #f.close() 
   return (out,Er)
 
-def RWCalc(filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/10000.0),aH=0.0381,Erv=None,sigv=None,erase=False):
+def RWCalc(filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/10000.0),aH=0.0381,A=None,B=None,scale=None,Erv=None,sigv=None,erase=False):
 
   #n=10
   #Er = np.linspace(7,100,n)
@@ -136,7 +136,17 @@ def RWCalc(filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/1000
  
   path='{}/{}/{}/{}/{}/{}/'.format(det,band,Vs,alphas,aHs,Fs)
 
-  #print(path)
+  if A is not None:
+    As = '{:1.4f}'.format(A)
+    path+='{}/'.format(As)
+  if B is not None: 
+    Bs = '{:1.4f}'.format(B)
+    path+='{}/'.format(Bs)
+  if scale is not None: 
+    scales = '{:1.4f}'.format(scale)
+    path+='{}/'.format(scales)
+
+  print(path)
 
   #check for path
   f = h5py.File(filename,'a')
@@ -184,7 +194,7 @@ def RWCalc(filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/1000
 
   return (Er,sig)
 
-def storeQWidth(n,filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/10000.0),aH=0.0381,erase=False,maxEr=100,opt=True):
+def storeQWidth(n,filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=(1/10000.0),aH=0.0381,A=None,B=None,scale=None,erase=False,maxEr=100,opt=True):
 
   Er = np.linspace(7,maxEr,n)
   emin = np.min(Er)
@@ -195,7 +205,7 @@ def storeQWidth(n,filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=
   alphas = '{:1.3E}'.format(alpha)
   aHs = '{:1.4f}'.format(aH)
 
-  (Er_stored,sig_stored) = RWCalc(filename,det,band,F,V,alpha,aH)
+  (Er_stored,sig_stored) = RWCalc(filename,det,band,F,V,alpha,aH,A=A,B=B,scale=scale)
   n_stored = np.shape(Er_stored)[0]
 
   #print(Er)
@@ -236,12 +246,20 @@ def storeQWidth(n,filename='test.h5',det='GGA3',band='ER',F=0.00001,V=4.0,alpha=
   sigcalc = np.zeros(np.shape(E_needed))
   for i,E in enumerate(E_needed):
     print('Calculating with sigmomEdw for E = {:3.2f} keV'.format(E))
-    sigcalc[i] = pd.sigmomEdw(E,band=band,label=det,F=F,V=V,aH=aH,alpha=alpha)
+    if scale is None:
+      scale=1.0
+    if A is None:
+      A=0.16
+    if B is None:
+      B=0.18
+    print('Parameters: V = {:1.4f} V; aH = {:1.4f}; A = {:1.4f}; B = {:1.4f}; scale = {:1.4f}'.format(V,aH,A,B,scale))
+    Vmod=V*scale
+    sigcalc[i] = pd.sigmomEdw(E,band=band,label=det,F=F,V=Vmod,aH=aH,alpha=alpha,A=A,B=B)
     print(sigcalc[i])
      
   #print(E_needed)
   #print(sigcalc)
-  (Er_new,sig_new) = RWCalc(filename,det,band,F,V,alpha,aH,Erv=E_needed,sigv=sigcalc,erase=erase)
+  (Er_new,sig_new) = RWCalc(filename,det,band,F,V,alpha,aH,A=A,B=B,scale=scale,Erv=E_needed,sigv=sigcalc,erase=erase)
   return (Er_new,sig_new)
 
 def storeQWidthVaryF(n,filename='test.h5',det='GGA3',band='ER',MSfile='data/mcmc_fits.h5',Ffile='data/mcmc_fano.h5',V=4.0,alpha=(1/10000.0),aH=0.0381,erase=False,maxEr=100,opt=True):
@@ -807,7 +825,9 @@ else:
   filedir = os.path.dirname(os.path.abspath(__file__))
   datafile = os.path.join(filedir, '../analysis_notebooks/data/res_calc.h5')
 
-Enr_glob,signr_glob = RWCalc(filename=datafile,alpha=1/18.0,aH=0.0381,band='NR')
+#Enr_glob,signr_glob = RWCalc(filename=datafile,alpha=1/18.0,aH=0.0381,band='NR')
+#7/31/20 updated data file with new best fit point based on previous SAI correction (first correction)
+Enr_glob,signr_glob = RWCalc(filename=datafile,band='NR',aH=0.0380,V=4.0,alpha=(1/18.0),scale=0.9975,A=0.1493,B=0.1782) 
 
 #spline those diffs
 sig0_glob = inter.InterpolatedUnivariateSpline(Enr_glob, signr_glob , k=3)

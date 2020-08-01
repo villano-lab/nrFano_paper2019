@@ -654,10 +654,12 @@ def series_NRQ_sig_c1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
     #spline those diffs
     #sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
     #sig_corr = sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
-    sig_corr = fc.sig0_glob(Er) - er.sigQnrv_glob(Er) 
+    #sig_corr = fc.sig0_glob(Er) - er.sigQnrv_glob(Er) 
+    Vmod = 4.0*0.9975
+    sig_corr = fc.sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=Vmod,F=0,aH=0.03801,A=0.14928,B=0.178236,alpha=(1/18.0)))
 
     #set up return value so far
-    sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 
+    #sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 
 
     return sig_corr
 
