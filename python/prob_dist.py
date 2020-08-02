@@ -655,8 +655,12 @@ def series_NRQ_sig_c1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
     #sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
     #sig_corr = sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
     #sig_corr = fc.sig0_glob(Er) - er.sigQnrv_glob(Er) 
-    Vmod = 4.0*0.9975
-    sig_corr = fc.sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=Vmod,F=0,aH=0.03801,A=0.14928,B=0.178236,alpha=(1/18.0)))
+
+
+    #8/1/20 update for best fit based on exact sigma Parameters: V = 4.0000 V; aH = 0.0381; A = 0.1537; B = 0.1703; scale = 0.9948
+    #V=4.0,alpha=(1/18.0),aH=3.81134613e-02,A=1.53737587e-01,B=1.70327657e-01,scale=9.94778557e-01,maxEr=200)
+    Vmod = 4.0*9.94778557e-1
+    sig_corr = fc.sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=Vmod,F=0,aH=3.81134613e-2,A=1.53737587e-1,B=1.70327657e-1,alpha=(1/18.0)))
 
     #set up return value so far
     #sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 

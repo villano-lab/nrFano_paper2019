@@ -828,6 +828,9 @@ else:
 #Enr_glob,signr_glob = RWCalc(filename=datafile,alpha=1/18.0,aH=0.0381,band='NR')
 #7/31/20 updated data file with new best fit point based on previous SAI correction (first correction)
 Enr_glob,signr_glob = RWCalc(filename=datafile,band='NR',aH=0.0380,V=4.0,alpha=(1/18.0),scale=0.9975,A=0.1493,B=0.1782) 
+#8/1/20 update for best fit based on exact sigma Parameters: V = 4.0000 V; aH = 0.0381; A = 0.1537; B = 0.1703; scale = 0.9948
+#V=4.0,alpha=(1/18.0),aH=3.81134613e-02,A=1.53737587e-01,B=1.70327657e-01,scale=9.94778557e-01,maxEr=200)
+Enr_glob,signr_glob = RWCalc(filename=datafile,band='NR',aH=0.0381,V=4.0,alpha=(1/18.0),scale=0.9948,A=0.1537,B=0.1703) 
 
 #spline those diffs
 sig0_glob = inter.InterpolatedUnivariateSpline(Enr_glob, signr_glob , k=3)
