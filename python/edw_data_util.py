@@ -14,6 +14,7 @@ def getERNR():
     # the sorting is necessary!
     # otherwise the mask defined below will select the wrong data
     resER_data = resER_data.sort_values(by='E_recoil')
+    resNR_data = resNR_data.sort_values(by='E_recoil')
 
     #print (res_data.head(4))
 
