@@ -637,12 +637,12 @@ def series_NRQ_var_corr1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0
       + series_NRQ_sig_c1(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
 
     return sigr**2
-def series_NRQ_var_corr2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
+def series_NRQ_var_corr2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5',verbose=False):
 
     #set up return value so far
     sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) \
       + series_NRQ_sig_c1(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
-      + series_NRQ_sig_c2(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) 
+      + series_NRQ_sig_c2(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label,verbose=verbose) 
 
     return sigr**2
 def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
@@ -677,7 +677,7 @@ def series_NRQ_sig_c1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
 
     return sig_corr
 
-def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',verbose=False):
 
     ######This Correction is technically only defined at the values of the E points: 24.5 keV, 34 keV, 44 keV, 58 keV, and 97 keV
     # it is based on a multi-linear regression to the differences from the exact computation
@@ -719,14 +719,25 @@ def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
     coeff = switch_coeff.get(didx,np.asarray([0.00552431, 0.00133703, 0.01633244, 0.02117115]))
     intercept = switch_intercept.get(didx,-0.007662520580006483)
 
-    print(coeff)
-    print(intercept)
+    if verbose:
+      print(coeff)
+      print(intercept)
 
     corr2 = intercept
+    if verbose:
+      print('intercept: {}'.format(intercept))
     corr2+= coeff[0]*aH
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[0],aH,coeff[0]*aH))
     corr2+= coeff[1]*(V/4.0) #assuming! our fit done with nominal voltage 4V
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[1],(V/4.0),(V/4.0)*coeff[1]))
     corr2+= coeff[2]*A
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[2],A,coeff[2]*A))
     corr2+= coeff[3]*B
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[3],B,coeff[3]*B))
     
     return corr2
 
