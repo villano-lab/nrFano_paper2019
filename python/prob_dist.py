@@ -681,9 +681,12 @@ def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
 
     ######This Correction is technically only defined at the values of the E points: 24.5 keV, 34 keV, 44 keV, 58 keV, and 97 keV
     # it is based on a multi-linear regression to the differences from the exact computation
-    ER_data, NR_data = edu.getERNR()
-    NREr = np.asarray(NR_data['Erecoil'])
-    NREr = np.sort(NREr)
+    #ER_data, NR_data = edu.getERNR()
+    #NREr = np.asarray(NR_data['Erecoil'])
+    #NREr = np.sort(NREr)
+
+    #the stuff above is more general but it involves file I/O and may slow stuff down
+    NREr = np.asarray([24.5012,34.2156,44.2627,58.4014,97.7172])
 
     #the 24.5 keV point should be the first element, so assume those
     didx = 0
