@@ -403,6 +403,10 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
 
 #analytical distributions for QEr
 def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """
   
   eps = 3.0
   #get the resolutions
@@ -452,7 +456,10 @@ def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=
   return aq*np.exp((bq-cq*Q)*Q)*(1+erf(dq+eq*Q))
 
 def analytical_NRQ_mean(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
-  
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """  
   eps = 3.0
   #get the resolutions
   sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
@@ -514,6 +521,10 @@ def analytical_NRQ_mean(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.
   return T1+T2 
 
 def analytical_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """
   
   eps = 3.0
   #get the resolutions

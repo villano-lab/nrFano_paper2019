@@ -9,6 +9,18 @@ edelweiss_res.ipynb
 ## Extraction of error on Edelweiss "C" <br/>
 edelweiss_C.ipynb
 
+## sigmomEdw
+The true functional behavior of the variance.  Can be used for ER or NR.  Takes about a minute to do one calculation.
+
+## def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+This function is based on a moment expansion that goes beyond the Edelweiss expansion.  This one is pretty good at yield = 1 and gets worse when the yield gets lower.  For the ER band, this approximation is incredibly close to the actual function.  Further approximations are needed for NR.
+
+## series_NRQ_var_corr1
+For the best-fit point, this function returns the value for the true function.  I.e., returns sigmomEdw for nominal A, B, aH, scale.
+
+## series_NRQ_var_corr2
+We asses how different series_NRQ_var_corr1 is from sigmomEdw for a lattice of points taken from MCMC walkers for A, B, aH, and scale.  We do a multilinear fit to those differences and apply that correction to series_NRQ_var_corr1.
+
 ## Extraction of Edelweiss fit parameters and their errors using Edelweiss functions<br/>
 ### Allow A, B (the yield function), aH, V (the resolution fit and voltage), and m, C (the additional width) to vary
 notebook: edelweiss_C_systematicErrors_allParameters.ipynb
