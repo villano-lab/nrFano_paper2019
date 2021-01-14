@@ -1,0 +1,17 @@
+/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py:82: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  Y_Er = lambda Y,Etr: quad(Y_Erdist, Etr-widthfac*new_width(Etr), Etr+widthfac*new_width(Etr),limit=100,args=(Y,Etr,))[0]
+/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py:82: IntegrationWarning: The maximum number of subdivisions (100) has been achieved.
+  If increasing the limit yields no improvement it is advised to analyze 
+  the integrand in order to determine the difficulties.  If the position of a 
+  local difficulty can be determined (singularity, discontinuity) one will 
+  probably gain from splitting up the interval and calling the integrator 
+  on the subranges.  Perhaps a special-purpose integrator should be used.
+  Y_Er = lambda Y,Etr: quad(Y_Erdist, Etr-widthfac*new_width(Etr), Etr+widthfac*new_width(Etr),limit=100,args=(Y,Etr,))[0]
+/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py:363: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  norm = quad(gF,-1,4,args=(Er,))[0]
+/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py:396: RuntimeWarning: invalid value encountered in sqrt
+  return (np.sqrt(q2-mean**2))

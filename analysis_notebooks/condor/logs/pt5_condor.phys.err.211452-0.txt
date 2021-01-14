@@ -1,0 +1,2 @@
+/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py:395: RuntimeWarning: invalid value encountered in sqrt
+  return (np.sqrt(q2-mean**2))
