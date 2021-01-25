@@ -49,7 +49,11 @@ data/statistical_error_fits_corr.h5
 Repositories/nrFano_paper2019_master.git/analysis_notebooks/mcmc_corr1_sigmom_corrAB.ipynb
 
 ### Using series_NRQ_var_corr2
+Sample the corr2 posterior:
 Repositories/nrFano_paper2019_master.git/analysis_notebooks/mcmc_corr2_sigmom_corrAB.ipynb
+
+Determine how much a 1-sigma variation affects the yield function:
+Repositories/nrFano_paper2019_master.git/analysis_notebooks/mcmc_corr2_sigmom_corrAB_varianceEffect.ipynb
 
 ## Calculation of the 2-dimensional Y, Er joint distribution <br/>
 QEr_2D_joint.ipynb <br/>
