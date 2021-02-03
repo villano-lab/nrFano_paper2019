@@ -5,6 +5,7 @@ from scipy.integrate import quad
 import resfuncRead as rfr
 import scipy.optimize as so
 import EdwRes as er
+import edw_data_util as edu 
 import pandas as pd
 import scipy.interpolate as inter
 
@@ -402,6 +403,10 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
 
 #analytical distributions for QEr
 def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """
   
   eps = 3.0
   #get the resolutions
@@ -451,7 +456,10 @@ def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=
   return aq*np.exp((bq-cq*Q)*Q)*(1+erf(dq+eq*Q))
 
 def analytical_NRQ_mean(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
-  
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """  
   eps = 3.0
   #get the resolutions
   sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
@@ -513,6 +521,10 @@ def analytical_NRQ_mean(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.
   return T1+T2 
 
 def analytical_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """
   
   eps = 3.0
   #get the resolutions
@@ -636,12 +648,21 @@ def series_NRQ_var_corr1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0
       + series_NRQ_sig_c1(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
 
     return sigr**2
+def series_NRQ_var_corr2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5',verbose=False):
+
+    #set up return value so far
+    sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) \
+      + series_NRQ_sig_c1(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
+      + series_NRQ_sig_c2(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label,verbose=verbose) 
+
+    return sigr**2
 def series_NRQ_var_corr(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
 
     #set up return value so far
     sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) \
       + series_NRQ_sig_c1(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
-      + series_NRQ_sig_c2(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label,corr1file=corr1file) 
+      + series_NRQ_sig_c2(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label) \
+      + series_NRQ_sig_c3(Er=Er,F=F,V=V,aH=aH,A=A,B=B,alpha=alpha,label=label,corr1file=corr1file) 
 
     return sigr**2
 
@@ -654,14 +675,88 @@ def series_NRQ_sig_c1(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
     #spline those diffs
     #sig0 = inter.InterpolatedUnivariateSpline(Enr, signr , k=3)
     #sig_corr = sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=4.0,F=0,aH=0.0381,A=0.16,B=0.18,alpha=(1/18.0)))
-    sig_corr = fc.sig0_glob(Er) - er.sigQnrv_glob(Er) 
+    #sig_corr = fc.sig0_glob(Er) - er.sigQnrv_glob(Er) 
+
+
+    #8/1/20 update for best fit based on exact sigma Parameters: V = 4.0000 V; aH = 0.0381; A = 0.1537; B = 0.1703; scale = 0.9948
+    #V=4.0,alpha=(1/18.0),aH=3.81134613e-02,A=1.53737587e-01,B=1.70327657e-01,scale=9.94778557e-01,maxEr=200)
+    Vmod = 4.0*9.94778557e-1
+    sig_corr = fc.sig0_glob(Er) - np.sqrt(series_NRQ_var(Er,V=Vmod,F=0,aH=3.81134613e-2,A=1.53737587e-1,B=1.70327657e-1,alpha=(1/18.0)))
 
     #set up return value so far
-    sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 
+    #sigr = np.sqrt(series_NRQ_var(Er=Er,F=F,V=V,aH=aH,alpha=alpha,A=A,B=B)) + sig_corr 
 
     return sig_corr
 
-def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
+def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',verbose=False):
+
+    ######This Correction is technically only defined at the values of the E points: 24.5 keV, 34 keV, 44 keV, 58 keV, and 97 keV
+    # it is based on a multi-linear regression to the differences from the exact computation
+    #ER_data, NR_data = edu.getERNR()
+    #NREr = np.asarray(NR_data['Erecoil'])
+    #NREr = np.sort(NREr)
+
+    #the stuff above is more general but it involves file I/O and may slow stuff down
+    NREr = np.asarray([24.5012,34.2156,44.2627,58.4014,97.7172])
+
+    #the 24.5 keV point should be the first element, so assume those
+    didx = 0
+    dist = np.abs(Er-NREr[didx])
+    #coeffs in order: aH, scale, A, B
+    coeff= np.asarray([0.00552431, 0.00133703, 0.01633244, 0.02117115])
+    intercept= -0.007662520580006483
+
+    for i,E in enumerate(NREr):
+        newdist = np.abs(Er-E)
+        if newdist<dist:
+          dist = newdist
+          didx = i
+
+    
+    switch_coeff={
+            0:np.asarray([0.00552431, 0.00133703, 0.01633244, 0.02117115]),
+            1:np.asarray([0.00891606, 0.00139528, 0.013981,   0.01819466]),
+            2:np.asarray([0.01268575, 0.00128421, 0.01304974, 0.01676499]),
+            3:np.asarray([0.0195214,  0.00114802, 0.01256059, 0.01603726]),
+            4:np.asarray([0.02973745, 0.00088643, 0.01310807, 0.01668303])
+
+            }
+    switch_intercept={
+            0:-0.007662520580006483,
+            1:-0.006976876162577476,
+            2:-0.006621463867453043,
+            3:-0.00654459822082259,
+            4:-0.006859726936860776
+
+            }
+
+    coeff = switch_coeff.get(didx,np.asarray([0.00552431, 0.00133703, 0.01633244, 0.02117115]))
+    intercept = switch_intercept.get(didx,-0.007662520580006483)
+
+    if verbose:
+      print(coeff)
+      print(intercept)
+
+    corr2 = intercept
+    if verbose:
+      print('intercept: {}'.format(intercept))
+    corr2+= coeff[0]*aH
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[0],aH,coeff[0]*aH))
+    corr2+= coeff[1]*(V/4.0) #assuming! our fit done with nominal voltage 4V
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[1],(V/4.0),(V/4.0)*coeff[1]))
+    corr2+= coeff[2]*A
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[2],A,coeff[2]*A))
+    corr2+= coeff[3]*B
+    if verbose:
+      print('coef X X0 = {:01.7f} X {:01.7f} = {:01.7f}'.format(coeff[3],B,coeff[3]*B))
+    
+    return corr2
+
+
+def series_NRQ_sig_c3(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3',corr1file='data/sigdiff_test.h5'):
 
     ######Next Correction (can only do it if Er is near the Edw data values)
     f = h5py.File(corr1file,'r')

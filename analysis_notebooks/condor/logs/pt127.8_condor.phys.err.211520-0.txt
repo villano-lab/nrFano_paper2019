@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "/home/phys/villaa/python/anaconda3_2019/envs/py373_gammapi/lib/python3.7/site-packages/h5py/_hl/files.py", line 182, in make_fid
+    fid = h5f.open(name, h5f.ACC_RDWR, fapl=fapl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5f.pyx", line 85, in h5py.h5f.open
+OSError: Unable to open file (unable to lock file, errno = 11, error message = 'Resource temporarily unavailable')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/phys/villaa/analysis/misc/nrFano_paper2019/python/sig_diff.py", line 142, in <module>
+    output,frac = prob.diffmap(permute,Etest=Etest,outfile='data/sigdiff_test1.h5')  
+  File "/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py", line 754, in diffmap
+    Enr,signr = fc.RWCalc(filename='data/res_calc.h5',alpha=1/18.0,aH=0.0381,band='NR')
+  File "/home/phys/villaa/analysis/misc/nrFano_paper2019/python/fano_calc.py", line 142, in RWCalc
+    f = h5py.File(filename,'a')
+  File "/home/phys/villaa/python/anaconda3_2019/envs/py373_gammapi/lib/python3.7/site-packages/h5py/_hl/files.py", line 394, in __init__
+    swmr=swmr)
+  File "/home/phys/villaa/python/anaconda3_2019/envs/py373_gammapi/lib/python3.7/site-packages/h5py/_hl/files.py", line 184, in make_fid
+    fid = h5f.create(name, h5f.ACC_EXCL, fapl=fapl, fcpl=fcpl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5f.pyx", line 105, in h5py.h5f.create
+OSError: Unable to create file (unable to open file: name = 'data/res_calc.h5', errno = 17, error message = 'File exists', flags = 15, o_flags = c2)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/phys/villaa/analysis/misc/nrFano_paper2019/python/sig_diff.py", line 154, in <module>
+    traceback.print_exc(file=sys.stderr)
+NameError: name 'traceback' is not defined
