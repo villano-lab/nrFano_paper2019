@@ -403,6 +403,10 @@ def sigmomEdw(Er,band='ER',label='GGA3',F=0.000001,V=4.0,aH=0.0381,alpha=(1/100)
 
 #analytical distributions for QEr
 def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """
   
   eps = 3.0
   #get the resolutions
@@ -452,7 +456,10 @@ def analytical_NRQ_dist(Q,Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=
   return aq*np.exp((bq-cq*Q)*Q)*(1+erf(dq+eq*Q))
 
 def analytical_NRQ_mean(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
-  
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """  
   eps = 3.0
   #get the resolutions
   sigHv,sigIv,sigQerv,sigH_NRv,sigI_NRv,sigQnrv = \
@@ -514,6 +521,10 @@ def analytical_NRQ_mean(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.
   return T1+T2 
 
 def analytical_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
+  """
+  This function is based on an approximation that is no better than the Edelweiss approximation.
+  Do not use.
+  """
   
   eps = 3.0
   #get the resolutions
@@ -681,9 +692,12 @@ def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
 
     ######This Correction is technically only defined at the values of the E points: 24.5 keV, 34 keV, 44 keV, 58 keV, and 97 keV
     # it is based on a multi-linear regression to the differences from the exact computation
-    ER_data, NR_data = edu.getERNR()
-    NREr = np.asarray(NR_data['Erecoil'])
-    NREr = np.sort(NREr)
+    #ER_data, NR_data = edu.getERNR()
+    #NREr = np.asarray(NR_data['Erecoil'])
+    #NREr = np.sort(NREr)
+
+    #the stuff above is more general but it involves file I/O and may slow stuff down
+    NREr = np.asarray([24.5012,34.2156,44.2627,58.4014,97.7172])
 
     #the 24.5 keV point should be the first element, so assume those
     didx = 0
@@ -704,7 +718,7 @@ def series_NRQ_sig_c2(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18
             1:np.asarray([0.00891606, 0.00139528, 0.013981,   0.01819466]),
             2:np.asarray([0.01268575, 0.00128421, 0.01304974, 0.01676499]),
             3:np.asarray([0.0195214,  0.00114802, 0.01256059, 0.01603726]),
-            4:np.asarray([0.0195214,  0.00114802, 0.01256059, 0.01603726])
+            4:np.asarray([0.02973745, 0.00088643, 0.01310807, 0.01668303])
 
             }
     switch_intercept={

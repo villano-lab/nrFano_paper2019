@@ -1,0 +1,4 @@
+/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py:396: RuntimeWarning: invalid value encountered in sqrt
+  return (np.sqrt(q2-mean**2))
+/home/phys/villaa/analysis/misc/nrFano_paper2019/python/prob_dist.py:771: RuntimeWarning: divide by zero encountered in double_scalars
+  frac[i] = (sig_res-sig_res_func)/sig_res

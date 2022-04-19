@@ -1,0 +1,25 @@
+#+CondorGroup = "phys"
++CondorGroup = "cdms"
++HappyToBeEvicted = TRUE
+Universe        = vanilla
+Executable      = /home/phys/villaa/analysis/misc/nrFano_paper2019/python/sig_diff.py 
+GetEnv		= true
+
+remote_initialdir = /home/phys/villaa/analysis/misc/nrFano_paper2019/analysis_notebooks/ 
+
+Notification = error
+Notify_user = $ENV(USER)@physics.umn.edu
+
+Requirements = (Machine != "cdms2.spa.umn.edu") && (Arch=="X86_64")
+#request_memory = ImageSize
+
+OutputDir	= /home/phys/villaa/analysis/misc/nrFano_paper2019/analysis_notebooks/condor/logs/
+Error       = $(OutputDir)/ptENERGY_condor.phys.err.$(Cluster)-$(Process).txt
+Log         = $(OutputDir)/ptENERGY_condor.phys.log.$(Cluster)-$(Process).txt
+Output		= $(OutputDir)/ptENERGY_condor.phys.out.$(Cluster)-$(Process).txt
+
+#should_transfer_files = YES
+#when_to_transfer_output = ON_EXIT
+
+Arguments = "-n NUM -E ENERGY"
+Queue
