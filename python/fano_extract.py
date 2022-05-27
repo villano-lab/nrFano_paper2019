@@ -22,6 +22,11 @@ def get_sigvec(Evec,csample,cpsample):
     varv = np.vectorize(var)
     #print(varv(Evec))
 
-    print(np.sqrt(varv(Evec)+(cpsample[0]+Evec*cpsample[1])**2))
+    #below is diagnostic for ms fit
+    #print(np.sqrt(varv(Evec)+(cpsample[0]+Evec*cpsample[1])**2))
+    #below is diagnostic for main fit
+    #print(np.sqrt(varv(Evec)+(csample[1]+Evec*csample[2])**2))
+
+    print(np.sqrt(varv(Evec)-(cpsample[0]+Evec*cpsample[1])**2+(csample[1]+Evec*csample[2])**2))
 
     return
