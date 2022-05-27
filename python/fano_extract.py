@@ -27,6 +27,6 @@ def get_sigvec(Evec,csample,cpsample):
     #below is diagnostic for main fit
     #print(np.sqrt(varv(Evec)+(csample[1]+Evec*csample[2])**2))
 
-    print(np.sqrt(varv(Evec)-(cpsample[0]+Evec*cpsample[1])**2+(csample[1]+Evec*csample[2])**2))
+    retv = np.sqrt(varv(Evec)-(cpsample[0]+Evec*cpsample[1])**2+(csample[1]+Evec*csample[2])**2)
 
-    return
+    return retv
