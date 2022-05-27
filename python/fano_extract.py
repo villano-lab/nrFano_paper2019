@@ -20,6 +20,8 @@ def get_sigvec(Evec,csample,cpsample):
     #print(csample[3])
     var = lambda E: pd.series_NRQ_var_corr1(E,0.0,csample[3]*4.0,csample[0],(1/18.0),csample[4],csample[5])
     varv = np.vectorize(var)
-    print(varv(Evec))
+    #print(varv(Evec))
+
+    print(np.sqrt(varv(Evec)+(cpsample[0]+Evec*cpsample[1])**2))
 
     return
