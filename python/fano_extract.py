@@ -47,9 +47,10 @@ def get_root_from_sigvec(Evec,csample,cpsample):
       #print(Er)
       #print(pd.series_NRQ_var_corr1(Er,0.0,csample[3]*4.0,csample[0],(1/18.0),csample[4],csample[5]))
       #print(pd.series_NRQ_var_corr1(Er,400,csample[3]*4.0,csample[0],(1/18.0),csample[4],csample[5]))
-      print('f(a): {0:0.8f}'.format(fano(0)))
-      print('f(b): {0:0.8f}'.format(fano(400)))
+      #print('f(a): {0:0.8f}'.format(fano(0)))
+      #print('f(b): {0:0.8f}'.format(fano(500)))
       #get the root
-      Fvec[i] = optimize.root_scalar(fano, bracket=[0.0, 400], method='brentq').root 
+      #Fvec[i] = optimize.root_scalar(fano, bracket=[0.0, 500], method='brentq').root 
+      Fvec[i] = optimize.root_scalar(fano, x0=10, x1=11, bracket=None, method=None).root 
 
     return Fvec
