@@ -21,7 +21,10 @@ For the best-fit point, this function returns the value for the true function.  
 ## series_NRQ_var_corr2
 We asses how different series_NRQ_var_corr1 is from sigmomEdw for a lattice of points taken from MCMC walkers for A, B, aH, and scale.  We do a multilinear fit to those differences and apply that correction to series_NRQ_var_corr1.
 
-## Extraction of Edelweiss fit parameters and their errors using Edelweiss functions<br/>
+## Extraction of Edelweiss fit parameters 
+### Fit using the correct variance function 
+Repositories/nrFano_paper2019_master.git/analysis_notebooks/edelweiss_fit_allParameters_sigmom_ABCorr.ipynb
+
 ### Allow A, B (the yield function), aH, V (the resolution fit and voltage), and m, C (the additional width) to vary
 notebook: edelweiss_C_systematicErrors_allParameters.ipynb
 MCMC sample chain: data/edelweiss_C_systematicErrors_sampler_nll_allpars_gausPrior.h5
@@ -40,6 +43,17 @@ data/systematic_error_fits_corr.h5
 ### Allow only m and C (the additional width) to vary
 edelweiss_C_statisticalErrors_corr.ipynb
 data/statistical_error_fits_corr.h5
+
+## MCMC estimate of uncertainty
+### Using series_NRQ_var_corr1
+Repositories/nrFano_paper2019_master.git/analysis_notebooks/mcmc_corr1_sigmom_corrAB.ipynb
+
+### Using series_NRQ_var_corr2
+Sample the corr2 posterior:
+Repositories/nrFano_paper2019_master.git/analysis_notebooks/mcmc_corr2_sigmom_corrAB.ipynb
+
+Determine how much a 1-sigma variation affects the yield function:
+Repositories/nrFano_paper2019_master.git/analysis_notebooks/mcmc_corr2_sigmom_corrAB_varianceEffect.ipynb
 
 ## Calculation of the 2-dimensional Y, Er joint distribution <br/>
 QEr_2D_joint.ipynb <br/>
