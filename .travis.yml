@@ -14,7 +14,7 @@ install:
   # Useful for debugging any issues with conda
   - conda info -a
 
-  - conda env create -n test-environment python=$TRAVIS_PYTHON_VERSION -f nr_fano_env.yml 
+  - conda env create -n test-environment python=$TRAVIS_PYTHON_VERSION -f nr_fano_env_new.yml 
   - source activate test-environment
 
   # Useful for debugging version of emcee 

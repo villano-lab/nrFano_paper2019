@@ -1,0 +1,40 @@
+name: fano_pub_new
+channels:
+  - default
+dependencies:
+  - python==3.8.0
+#  - anaconda::anaconda
+#  - pandas
+#  - astropy::gammapy
+#  - astropy::corner
+#  - matplotlib
+#  - mpld3
+#  - h5py
+  - lmfit
+  - ipykernel
+#  - nb_conda_kernels
+  - anaconda-client==1.8.0
+  - anaconda-project==0.10.1
+  - anaconda::pytest==6.1.1
+  - nb_conda_kernels==2.3.1
+  - jupyterlab==3.1.7
+  - ipywidgets==7.6.4
+#  - _anaconda_depends==2020.07
+  - pip==21.2.2
+  - conda-forge::emcee==3.0.2
+  - astropy::corner==2.2.1
+  - pip:
+    - papermill==2.3.3
+    - uproot==4.0.11
+    - awkward==1.3.0
+#    - tqdm
+#    - uproot
+#    - svgpathtools
+#    - bootstrapped 
+    - numpy==1.19.2
+    - scipy==1.5.2
+    - tabulate==0.8.9
+    - nbconvert==6.0.7
+    - matplotlib==3.3.4
+    - pandas==1.1.5
+    - h5py==2.10.0
