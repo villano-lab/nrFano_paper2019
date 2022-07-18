@@ -16,6 +16,7 @@ dependencies:
   - astropy::corner
   - pip:
     - papermill
+    - bootstrapped 
     - uproot
     - awkward
     - numpy
