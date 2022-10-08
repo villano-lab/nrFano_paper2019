@@ -28,6 +28,7 @@ dependencies:
     - papermill==2.3.3
     - uproot==4.0.11
     - awkward==1.3.0
+    - joblib
 #    - tqdm
 #    - uproot
 #    - svgpathtools
