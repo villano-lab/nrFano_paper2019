@@ -606,7 +606,7 @@ def series_ERQ_var(Er=10.0,a=0.0,b=0.0381,V=4.0,label='GGA3'):
   chi = (1+scale)
   omega = scale
 
-  return ((1+omega)**2/Er**2)*(sigHv(0.0)**2+sigIv(0.0)**2+a*Er+b*Er**2)
+  return ((1+omega)**2/Er**2)*(sigHv(0.0)**2+sigIv(0.0)**2+a*Er+b**2*Er**2)
 
 def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
   
