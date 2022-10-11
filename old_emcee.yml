@@ -32,8 +32,9 @@ dependencies:
 #    - tqdm
 #    - uproot
 #    - svgpathtools
-#    - bootstrapped 
-    - numpy==1.19.2
+    - bootstrapped 
+    #- numpy==1.19.2
+    - numpy==1.23.3
     - scipy==1.5.2
     - tabulate==0.8.9
     - nbconvert==6.0.7
