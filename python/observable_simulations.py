@@ -4,6 +4,10 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 import h5py
 
+
+# note that np.log() is the natural log (base e)
+FWHM_to_SIG = 1 / (2*np.sqrt(2*np.log(2)))
+
 def simQEr(label='GGA3',V=4.0,aH=None,C=None,F=0.0,highstats=True):
 
     #get detector resolution 
@@ -146,6 +150,69 @@ def simQEr_ER(label='GGA3',V=4.0,aH=None,C=None,F=0.0,HighER=300):
     
     #step 9
     EHer_ss = EHer_ss + np.random.normal(0.0,sigHv(EHer_ss))
+    
+    #step 10
+    Erer_ss = (1+(V/(1000*eps)))*EHer_ss - (V/(1000*eps))*EIer_ss
+    
+    #step 11
+    Qer_ss = EIer_ss/Erer_ss
+
+
+    return Qer_ss,Erer_ss
+
+#electron recoil sim with generic resolution params. 
+def simQEr_ER_gen(sig0=0.025,F=1.0,b=0.0381,V=4.0,HighER=300):
+
+    b = b*FWHM_to_SIG 
+
+    #get detector resolution 
+    sig = lambda E: np.sqrt(sig0**2 + b**2*E**2)
+
+    eps = 3.0/1000 #keV per pair, I usually use 3.3 for the numerator, but Edw. uses 3.
+    #print(sigQnrv)
+
+    #use the same generic shape to get the ER data but modify the number of events
+    Ner = 30000
+
+    #don't really need 4 columns here but keep it around for possibility of later simulating gamma multiples
+    er_energies = np.zeros((Ner,4))
+    er_hits = np.ones((Ner,))
+
+    er_energies[:,0] = np.random.uniform(0,HighER,Ner)
+
+    #print(np.shape(er_energies))
+    #print(np.shape(er_hits))
+    #print(er_energies[0:10,0])
+
+    Eer_ss = er_energies[er_hits==1] #initial energies are in keV
+    Eer_ss_sum = np.sum(Eer_ss,1)
+    
+    #step 1
+    EIerhit_av_ss = Eer_ss
+    
+    #step 2
+    Nerhit_av_ss = EIerhit_av_ss/eps
+    
+    #step 3
+    Nerhit_ss = np.around(np.random.normal(Nerhit_av_ss,np.sqrt(F*Nerhit_av_ss))).astype(np.float)
+    
+    #step 4
+    EHerhit_ss = (Eer_ss + Nerhit_ss*V/1000.0)/(1+(V/(1000*eps)))
+    
+    #step 5
+    EIerhit_ss = eps*Nerhit_ss
+    
+    #step 6
+    EIer_ss = np.sum(EIerhit_ss,1)
+    
+    #step 7
+    EHer_ss = np.sum(EHerhit_ss,1)
+    
+    #step 8
+    #add all detector resolution on the heat side
+    
+    #step 9
+    EHer_ss = EHer_ss + np.random.normal(0.0,sig(EHer_ss))
     
     #step 10
     Erer_ss = (1+(V/(1000*eps)))*EHer_ss - (V/(1000*eps))*EIer_ss
