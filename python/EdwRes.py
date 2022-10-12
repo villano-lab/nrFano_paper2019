@@ -199,6 +199,14 @@ def getEdw_res_pars(infile='data/edw_res_data.txt'):
       outdic[funcs['label'][i]] = vec
 
     return outdic
+def getGen_det_res(sig0=0.025,b=0.0381,V=4.0):
+
+    b = b*FWHM_to_SIG 
+
+    #get detector resolution 
+    sig = lambda E: np.sqrt(sig0**2 + b**2*E**2)
+
+    return sig
 
 def getEdw_det_res(label='GGA3',V=4.0,infile='data/edw_res_data.txt',aH=None,C=None, A=0.16, B=0.18):
 

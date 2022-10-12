@@ -608,6 +608,20 @@ def series_ERQ_var(Er=10.0,a=0.0,b=0.0381,V=4.0,label='GGA3'):
 
   return ((1+omega)**2/Er**2)*(sigHv(0.0)**2+sigIv(0.0)**2+a*Er+b**2*Er**2)
 
+#simQEr_ER_gen(sig0=sig0,F=F,b=b,V=V,HighER=300)
+def series_ERQ_var_gen(Er=10.0,sig0=0.025,F=0.1,b=0.0381,V=4.0):
+
+  eps = 3.0
+  #get the resolutions
+  sig = er.getGen_det_res(sig0,b,V)
+
+  #calculate basic variables
+  scale = (V/eps)
+  chi = (1+scale)
+  omega = scale
+
+  return ((1+omega)**2/Er**2)*(sig(Er)**2 + eps*F*Er + V*(scale/chi**2)*F*Er)
+
 def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
   
   eps = 3.0

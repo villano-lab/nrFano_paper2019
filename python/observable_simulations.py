@@ -166,7 +166,8 @@ def simQEr_ER_gen(sig0=0.025,F=1.0,b=0.0381,V=4.0,HighER=300):
     b = b*FWHM_to_SIG 
 
     #get detector resolution 
-    sig = lambda E: np.sqrt(sig0**2 + b**2*E**2)
+    sig1 = lambda E: np.sqrt(sig0**2 + b**2*E**2)
+    sig = er.getGen_det_res(sig0,b,V) 
 
     eps = 3.0/1000 #keV per pair, I usually use 3.3 for the numerator, but Edw. uses 3.
     #print(sigQnrv)
@@ -212,7 +213,7 @@ def simQEr_ER_gen(sig0=0.025,F=1.0,b=0.0381,V=4.0,HighER=300):
     #add all detector resolution on the heat side
     
     #step 9
-    EHer_ss = EHer_ss + np.random.normal(0.0,sig(EHer_ss))
+    EHer_ss = EHer_ss + np.random.normal(0.0,sig1(EHer_ss))
     
     #step 10
     Erer_ss = (1+(V/(1000*eps)))*EHer_ss - (V/(1000*eps))*EIer_ss
