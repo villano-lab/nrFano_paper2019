@@ -171,7 +171,7 @@ def simQEr_ER_gen(sig0=0.025,F=1.0,b=0.0381,V=4.0,HighER=300):
     #print(sigQnrv)
 
     #use the same generic shape to get the ER data but modify the number of events
-    Ner = 30000
+    Ner = 3000000
 
     #don't really need 4 columns here but keep it around for possibility of later simulating gamma multiples
     er_energies = np.zeros((Ner,4))
