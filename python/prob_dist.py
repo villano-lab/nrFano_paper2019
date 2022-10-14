@@ -621,7 +621,7 @@ def series_ERQ_var_gen(Er=10.0,sig0=0.025,F=0.1,b=0.0381,V=4.0):
   omega = scale
 
   #return ((1+omega)**2/Er**2)*(sig(Er)**2 + (eps/1000)*F*Er + V*(scale/chi**2)*F*Er)
-  return (1/Er**2)*(chi**2*sig(Er)**2 + (eps/1000)*F*Er)
+  return (1/Er**2)*(chi**2*sig(Er)**2 + eps*1e-3*F*Er)
 
 def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
   
