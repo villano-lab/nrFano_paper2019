@@ -1,0 +1,11 @@
+     fun: 464930.965087311
+    funl: array([464930.96508731])
+ message: 'Optimization terminated successfully.'
+    nfev: 13
+     nit: 2
+   nlfev: 4
+   nlhev: 0
+   nljev: 1
+ success: True
+       x: array([0., 0., 0.])
+      xl: array([[0., 0., 0.]])

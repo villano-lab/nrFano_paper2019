@@ -619,9 +619,32 @@ def series_ERQ_var_gen(Er=10.0,sig0=0.025,F=0.1,b=0.0381,V=4.0):
   scale = (V/eps)
   chi = (1+scale)
   omega = scale
+  qbar=1.0
+
+  #Get Edw terms
+  TEdw = (1/Er**2)*(chi**2*sig(Er)**2 + eps*1e-3*F*Er)
+
+  #Get qbar cross-terms
+  T1 = (1/Er**2)*(chi**2*sig(Er)**2)
+
+  #Get mixed second derivatives
+  T2 = (1/Er**4)*(4*qbar**2*chi**2*omega**2+chi**2+2*qbar*chi**2*omega)*sig(Er)**2*0
+
+  #Get pure second derivatives
+  T3 = (1/Er**4)*(1/2)*(4*qbar**2*chi**4*sig(Er)**4)
+
+  #third derivatives have a couple terms that are of the same order in 1/Er (mixed 3rd derivatives)
+  T4 = (1/Er**4)*((1+qbar*omega)*(2*chi**2+6*qbar*chi**2*omega) + (qbar*chi)*(4*omega*chi+6*qbar*omega**2*chi))*sig(Er)**2*0
+
+  #third derivatives have a couple more terms that are of the same order in 1/Er (pure 3rd derivatives) 
+  T5 = (1/Er**4)*((qbar*chi)*(6*chi**3*qbar)*sig(Er)**4)
+
+  #fourth derivatives have next order in 1/Er (pure 4th derivatives) 
+  T6 = (1/Er**6)*(15/24.0)*((2*qbar*chi**2)*(24*chi**4*qbar)*sig(Er)**6)
 
   #return ((1+omega)**2/Er**2)*(sig(Er)**2 + (eps/1000)*F*Er + V*(scale/chi**2)*F*Er)
-  return (1/Er**2)*(chi**2*sig(Er)**2 + eps*1e-3*F*Er)
+  #return (1/Er**2)*(chi**2*sig(Er)**2 + eps*1e-3*F*Er)
+  return TEdw+(T2+T3+T4+T5+T6)
 
 def series_NRQ_var(Er=10.0,F=0.0,V=4.0,aH=0.0381,alpha=(1/18.0),A=0.16,B=0.18,label='GGA3'):
   
