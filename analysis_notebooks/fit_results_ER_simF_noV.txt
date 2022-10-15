@@ -1,11 +1,11 @@
-     fun: 241663.69859339617
-    funl: array([241663.6985934])
- message: 'Optimization terminated successfully.'
-    nfev: 13
-     nit: 2
-   nlfev: 4
-   nlhev: 0
-   nljev: 1
- success: True
-       x: array([0.5, 0.5, 0. ])
-      xl: array([[0.5, 0.5, 0. ]])
+ final_simplex: (array([[0.054964  , 0.11836224, 0.02004022],
+       [0.05496491, 0.11835332, 0.02004022],
+       [0.05496466, 0.1183525 , 0.02004022],
+       [0.05496377, 0.11836603, 0.02004021]]), array([-154.71948751, -154.7194875 , -154.7194875 , -154.7194875 ]))
+           fun: -154.71948750665166
+       message: 'Optimization terminated successfully.'
+          nfev: 168
+           nit: 91
+        status: 0
+       success: True
+             x: array([0.054964  , 0.11836224, 0.02004022])
