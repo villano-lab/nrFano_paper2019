@@ -76,7 +76,7 @@ def expband_2D(f,alpha=(1/100),widthfac=1):
     b = 3-m*10
     width = lambda Etr: m*Etr + b
 
-    new_width = lambda r: np.piecewise(np.float(r), [r<=0, r > 0], [lambda r: 0.0, lambda r: r*m + b])
+    new_width = lambda r: np.piecewise(float(r), [r<=0, r > 0], [lambda r: 0.0, lambda r: r*m + b])
 
     Y_Erdist = lambda Er,Y,Etr: f(Y,Etr,Er)*pnr(Er)
     #Y_Er = lambda Y,Etr: quad(Y_Erdist, 0.1, np.inf,limit=100,args=(Y,Etr,))[0]

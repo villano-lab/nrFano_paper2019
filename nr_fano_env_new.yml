@@ -2,18 +2,12 @@ name: fano_pub_new
 channels:
   - default
 dependencies:
-  - python
-  - lmfit
-  - ipykernel
+  - python==3.7
   - anaconda-client
   - anaconda-project
   - anaconda::pytest
   - nb_conda_kernels
-  - jupyterlab
   - pip
-  - conda-forge::emcee
-  - astropy::gammapy
-  - astropy::corner
   - pip:
     - papermill
     - bootstrapped 
@@ -26,3 +20,9 @@ dependencies:
     - matplotlib
     - pandas
     - h5py
+    - lmfit
+    - ipykernel
+    - jupyterlab
+    - gammapy
+    - corner
+    - emcee
