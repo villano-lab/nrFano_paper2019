@@ -50,8 +50,8 @@ def simQEr(label='GGA3',V=4.0,aH=None,C=None,F=0.0,highstats=True):
     Nhit_av_ss = EIhit_av_ss/eps
     
     #step 3
-    Nhit = np.around(np.random.normal(Nhit_av,np.sqrt(F*Nhit_av))).astype(np.float)
-    Nhit_ss = np.around(np.random.normal(Nhit_av_ss,np.sqrt(F*Nhit_av_ss))).astype(np.float)
+    Nhit = np.around(np.random.normal(Nhit_av,np.sqrt(F*Nhit_av))).astype(float)
+    Nhit_ss = np.around(np.random.normal(Nhit_av_ss,np.sqrt(F*Nhit_av_ss))).astype(float)
     
     #step 4
     EHhit = (Enr + Nhit*V/1000.0)/(1+(V/(1000*eps)))
@@ -127,7 +127,7 @@ def simQEr_ER(label='GGA3',V=4.0,aH=None,C=None,F=0.0,HighER=300):
     Nerhit_av_ss = EIerhit_av_ss/eps
     
     #step 3
-    Nerhit_ss = np.around(np.random.normal(Nerhit_av_ss,np.sqrt(F*Nerhit_av_ss))).astype(np.float)
+    Nerhit_ss = np.around(np.random.normal(Nerhit_av_ss,np.sqrt(F*Nerhit_av_ss))).astype(float)
     
     #step 4
     EHerhit_ss = (Eer_ss + Nerhit_ss*V/1000.0)/(1+(V/(1000*eps)))
@@ -193,7 +193,7 @@ def simQEr_ER_gen(sig0=0.025,F=1.0,b=0.0381,V=4.0,HighER=300):
     Nerhit_av_ss = EIerhit_av_ss/eps
     
     #step 3
-    Nerhit_ss = np.around(np.random.normal(Nerhit_av_ss,np.sqrt(F*Nerhit_av_ss))).astype(np.float)
+    Nerhit_ss = np.around(np.random.normal(Nerhit_av_ss,np.sqrt(F*Nerhit_av_ss))).astype(float)
     
     #step 4
     EHerhit_ss = (Eer_ss + Nerhit_ss*V/1000.0)/(1+(V/(1000*eps)))

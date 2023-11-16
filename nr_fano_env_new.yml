@@ -2,7 +2,7 @@ name: fano_pub_new
 channels:
   - default
 dependencies:
-  - python
+  - python==3.7
   - anaconda-client
   - anaconda-project
   - anaconda::pytest

@@ -73,7 +73,7 @@ def inRange(val,mu,sig):
   diff = np.abs(mu-val)
 
   truth = sig>=diff
-  perc = np.float(np.sum(truth==1))/np.float(np.shape(truth)[0])
+  perc = float(np.sum(truth==1))/float(np.shape(truth)[0])
 
   return truth,perc
 

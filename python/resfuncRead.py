@@ -13,19 +13,19 @@ def getRFunc(infile):
     #print(line)
     det = np.uint32(line.split()[0])
     out[det] = {}
-    sqrt_vec = np.ones((6,),dtype=np.float64)
-    sqrt_vec[0] = np.float64(line.split()[1])
-    sqrt_vec[1] = np.float64(line.split()[2])
-    sqrt_vec[2] = np.float64(line.split()[3])
-    sqrt_vec[3] = np.float64(line.split()[4])
-    sqrt_vec[4] = np.float64(line.split()[5])
-    sqrt_vec[5] = np.float64(line.split()[6])
+    sqrt_vec = np.ones((6,),dtype=float64)
+    sqrt_vec[0] = float64(line.split()[1])
+    sqrt_vec[1] = float64(line.split()[2])
+    sqrt_vec[2] = float64(line.split()[3])
+    sqrt_vec[3] = float64(line.split()[4])
+    sqrt_vec[4] = float64(line.split()[5])
+    sqrt_vec[5] = float64(line.split()[6])
     out[det]['sqrt'] = sqrt_vec 
-    lin_vec = np.ones((6,),dtype=np.float64)
-    lin_vec[0] = np.float64(line.split()[7])
-    lin_vec[1] = np.float64(line.split()[8])
-    lin_vec[2] = np.float64(line.split()[9])
-    lin_vec[3] = np.float64(line.split()[10])
+    lin_vec = np.ones((6,),dtype=float64)
+    lin_vec[0] = float64(line.split()[7])
+    lin_vec[1] = float64(line.split()[8])
+    lin_vec[2] = float64(line.split()[9])
+    lin_vec[3] = float64(line.split()[10])
     out[det]['lin'] = lin_vec 
 
   f.close()
@@ -53,19 +53,19 @@ def getBandFunc(prefix):
     #print(line)
     det = np.uint32(line.split()[0])
     out[det] = {}
-    mu_vec = np.ones((2,),dtype=np.float64)
-    mu_vec[0] = np.float64(line.split()[1])
-    mu_vec[1] = np.float64(line.split()[2])
+    mu_vec = np.ones((2,),dtype=float64)
+    mu_vec[0] = float64(line.split()[1])
+    mu_vec[1] = float64(line.split()[2])
     out[det]['mu'] = mu_vec 
 
   for i,line in enumerate(g.readlines()):
     #print(line)
     det = np.uint32(line.split()[0])
-    sig_vec = np.ones((4,),dtype=np.float64)
-    sig_vec[0] = np.float64(line.split()[1])
-    sig_vec[1] = np.float64(line.split()[2])
-    sig_vec[2] = np.float64(line.split()[3])
-    sig_vec[3] = np.float64(line.split()[4])
+    sig_vec = np.ones((4,),dtype=float64)
+    sig_vec[0] = float64(line.split()[1])
+    sig_vec[1] = float64(line.split()[2])
+    sig_vec[2] = float64(line.split()[3])
+    sig_vec[3] = float64(line.split()[4])
     out[det]['sig'] = sig_vec 
 
   f.close()

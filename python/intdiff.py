@@ -130,7 +130,7 @@ def lam(t12,version='LT',sol=None):
     raise ValueError('lam: invalid input for g(xi)')
    
   #print(np.shape(gxi(1)))
-  func = lambda x: t12 - 1/(2*x)*np.float(gxi(x))
+  func = lambda x: t12 - 1/(2*x)*float(gxi(x))
 
   #print(np.shape(func(1)))
   root = so.brentq(func,1e-6,100,rtol=0.001,maxiter=100) #come within 1% of exact root
@@ -178,7 +178,7 @@ def getTFScreeningFunction():
   y0 = getphi0('numeric','data/phi0_NACI_format_mod.txt')
   y1v = np.vectorize(y0)
   y0v = np.vectorize(y1)
-  yguess = np.stack((np.asarray(y0(xmesh),dtype=np.float64),np.asarray(y1(xmesh),dtype=np.float64)),axis=0)
+  yguess = np.stack((np.asarray(y0(xmesh),dtype=float64),np.asarray(y1(xmesh),dtype=float64)),axis=0)
 
   a = integrate.solve_bvp(TFdiffeqsys,TFbc,xmesh,yguess,max_nodes=5000000,verbose=1)
   print(a.status)
@@ -206,7 +206,7 @@ def TFbc(ya,yb):
   y0 = getphi0('numeric','data/phi0_NACI_format_mod.txt')
   y1v = np.vectorize(y0)
   y0v = np.vectorize(y1)
-  out = np.asarray([ya[0]-y0(xmesh[0]),yb[0]-(144/xmax**3)],dtype=np.float64)
+  out = np.asarray([ya[0]-y0(xmesh[0]),yb[0]-(144/xmax**3)],dtype=float64)
     
   return out
 

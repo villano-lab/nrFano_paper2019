@@ -1,4 +1,6 @@
+# Caching
 __pycache__
+fontlist-*
 
 ~*
 venv/
